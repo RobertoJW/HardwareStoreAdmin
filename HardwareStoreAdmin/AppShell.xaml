@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HardwareStoreAdmin.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:HardwareStoreAdmin"
+    xmlns:AppClass ="clr-namespace:HardwareStoreAdmin.AppClass"
+    xmlns:iconos ="clr-namespace:HardwareStoreAdmin.Iconos"
+    BackgroundColor="{StaticResource BGGris}"
+    Shell.FlyoutBehavior="Flyout"
+    Title="HardwareStoreAdmin">
+
+    <ShellContent
+        Title="Inicio"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage">
+        <ShellContent.Icon>
+            <FontImageSource Glyph="{x:Static iconos:Iconos.Home}" FontFamily="MaterialIcons" Color="White" />
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <ShellContent
+        Title="Favoritos"
+        ContentTemplate="{DataTemplate AppClass:ListaFavoritos}"
+        Route="ListaFavoritos">
+        <ShellContent.Icon>
+            <FontImageSource Glyph="{x:Static iconos:Iconos.Favourite}" FontFamily="MaterialIcons" Color="White" />
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <ShellContent
+        Title="Gestionar Productos"
+        ContentTemplate="{DataTemplate AppClass:GestionProductos}"
+        Route="GestionProductos">
+        <ShellContent.Icon>
+            <FontImageSource Glyph="{x:Static iconos:Iconos.ManagementEdit}" FontFamily="MaterialIcons" Color="White" />
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <ShellContent
+        Title="Carrito de Compra"
+        ContentTemplate="{DataTemplate AppClass:CarritoCompra}"
+        Route="CarritoCompra">
+        <ShellContent.Icon>
+            <FontImageSource Glyph="{x:Static iconos:Iconos.Cart}" FontFamily="MaterialIcons" Color="White" />
+        </ShellContent.Icon>
+    </ShellContent>
+
+</Shell>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Iconos="clr-namespace:HardwareStoreAdmin.Iconos"
+             BackgroundColor="{StaticResource Gray100}"
+             x:Class="HardwareStoreAdmin.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*,*,*,*">
+                <!--Con este GRID, definimos la cabecera-->
+                <Grid BackgroundColor="{StaticResource BGGris}" Grid.Row="0" Padding="5" Grid.Column="0" Grid.ColumnSpan="4">
+                    <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BorderMod}">
+                            <SearchBar Style="{StaticResource SearhBarMod}" SearchButtonPressed="SearchBarBtn" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Fill">
+                    <Border Margin="80,20,0,20" Padding="10">
+                        <VerticalStackLayout>
+                        <Label Text="Nuestros periféricos" Style="{StaticResource MainPageLabel}"/>
+                        <Label Text="Periféricos" Style="{StaticResource MainPageLabel}"/>
+                        <Label Text="Periféricos" Style="{StaticResource MainPageLabel}"/>
+                        <Label Text="Periféricos" Style="{StaticResource MainPageLabel}"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Fill">
+                    <Border Margin="80,20,0,20" Padding="10">
+                        <Label Text="Portátiles" Style="{StaticResource MainPageLabel}"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Fill">
+                    <Border Margin="80,20,0,20" Padding="10">
+                        <Label Text="Ordenadores" Style="{StaticResource MainPageLabel}"/>
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

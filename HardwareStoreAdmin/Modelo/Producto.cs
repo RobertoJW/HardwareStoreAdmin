@@ -13,16 +13,18 @@ namespace HardwareStoreAdmin.Modelo
     {
         [Key] // Key tratará a id_producto como clave primaria y autoincremental
         public int id_producto { get; set; }
-        public byte[] image { get; set; }
+        public string imageUrl { get; set; }
         public string companyBrand { get; set; }
         public string nameProduct { get; set; }
         public string description { get; set; }
         public string category { get; set; }
         public double price { get; set; }
 
-        public Producto(byte[] image, string companyBrand, string nameProduct, string description, string category, double price)
+        public string TipoProducto { get; set; }
+
+        public Producto(string imageUrl, string companyBrand, string nameProduct, string description, string category, double price)
         {
-            this.image = image;
+            this.imageUrl = imageUrl;
             this.companyBrand = companyBrand;
             this.nameProduct = nameProduct;
             this.description = description;
@@ -30,6 +32,6 @@ namespace HardwareStoreAdmin.Modelo
             this.price = price;
         }
 
-        public Producto(){}
+        public Producto() { }
     }
 }

@@ -15,7 +15,7 @@ namespace HardwareStoreAdmin.Modelo
         public tipoPc tipoPc { get; set; }
         public int pulgadas { get; set; }
 
-        public Portatil(byte[] image, string companyBrand, string nameProduct, string description, string category, double price, tipoPc tipoPc, int pulgadas)
+        public Portatil(string image, string companyBrand, string nameProduct, string description, string category, double price, tipoPc tipoPc, int pulgadas)
             : base(image, companyBrand, nameProduct, description, category, price)
         {
             this.tipoPc = tipoPc;

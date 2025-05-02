@@ -16,14 +16,15 @@ namespace HardwareStoreAdmin.Modelo
         // la contraseña no puede ser modificado. 
         public string password { get; private set; }
         // añadimos '?' para permitir valores nulos para fotos de perfil. 
-        public byte[] profilePhoto { get; set; }
+        public string? UrlprofilePhoto { get; set; }
 
-        public Usuario(string email, string userName, string password, byte[] profilePhoto = null)
+        public Usuario(string email, string userName, string password, string? UrlprofilePhoto)
         {
             this.email = email;
             this.userName = userName;
             this.password = password;
-            this.profilePhoto = profilePhoto;
+            this.UrlprofilePhoto = UrlprofilePhoto;
         }
+        public Usuario() { }
     }
 }

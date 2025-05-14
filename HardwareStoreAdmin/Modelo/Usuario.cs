@@ -25,6 +25,7 @@ namespace HardwareStoreAdmin.Modelo
             this.password = password;
             this.UrlprofilePhoto = UrlprofilePhoto;
         }
+
         public Usuario() { }
     }
 }

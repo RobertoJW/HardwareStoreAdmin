@@ -14,11 +14,11 @@ namespace HardwareStoreAdmin.Modelo
     {
         public tipoPc tipoPc { get; set; }
 
-        public Sobremesa(string image, string companyBrand, string nameProduct, string description, string category, double price)
-            : base(image, companyBrand, nameProduct, description, category, price)
+        public Sobremesa(string image, string companyBrand, string nameProduct, string category, decimal price, tipoPc tipoPc)
+            : base(image, companyBrand, nameProduct, category, price)
         {
             this.tipoPc = tipoPc;
         }
-        public Sobremesa() {}
+        public Sobremesa() { }
     }
 }

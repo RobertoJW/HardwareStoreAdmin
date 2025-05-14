@@ -13,14 +13,18 @@ namespace HardwareStoreAdmin.Modelo
     public class Portatil : Producto
     {
         public tipoPc tipoPc { get; set; }
-        public int pulgadas { get; set; }
+        public int Pulgadas { get; set; }
+        public int Bateria { get; set; }
+        public string Resolucion { get; set; }
 
-        public Portatil(string image, string companyBrand, string nameProduct, string description, string category, double price, tipoPc tipoPc, int pulgadas)
-            : base(image, companyBrand, nameProduct, description, category, price)
+        public Portatil(string image, string companyBrand, string nameProduct, string category, decimal price, int pulgadas, int bateria, tipoPc tipoPc, string resolucion)
+            : base(image, companyBrand, nameProduct, category, price)
         {
             this.tipoPc = tipoPc;
-            this.pulgadas = pulgadas;
+            this.Bateria = bateria;
+            this.Pulgadas = pulgadas;
+            this.Resolucion = resolucion;
         }
-        public Portatil() {}
+        public Portatil() { }
     }
 }

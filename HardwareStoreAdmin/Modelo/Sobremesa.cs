@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HardwareStoreAdmin.Modelo;
 
-namespace HardwareStoreAPI.Modelo
+namespace HardwareStoreAdmin.Modelo
 {
     public class Sobremesa : Producto
     {

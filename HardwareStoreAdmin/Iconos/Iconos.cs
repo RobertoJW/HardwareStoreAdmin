@@ -8,12 +8,14 @@ namespace HardwareStoreAdmin.Iconos
 {
     public class Iconos
     {
-        public static string Home = "\ue88a";
-        public static string Cart = "\ue8cc";
-        public static string Favourite = "\ue87d";
-        public static string Visibility = "\ue8f4";
-        public static string VisibilityOff = "\ue8f5";
-        public static string ManagementEdit = "\uf88d";
-        public static string Search = "\ue8b6";
+        public static string mail = "\ue158";
+        public static string usuario = "\ue853";
+        public static string contrasena = "\ue73c";
+        public static string ojoAbierto = "\ue8f4";
+        public static string ojoCerrado = "\ue8f5";
+        public static string lupa = "\ue8b6";
+        public static string home = "\ue88a";
+        public static string carrito = "\ue8cc";
+        public static string corazon = "\ue87d";
     }
 }

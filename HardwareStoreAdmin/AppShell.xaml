@@ -7,7 +7,7 @@
     xmlns:AppClass ="clr-namespace:HardwareStoreAdmin.AppClass"
     xmlns:iconos ="clr-namespace:HardwareStoreAdmin.Iconos"
     BackgroundColor="{StaticResource BGGris}"
-    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
     Title="HardwareStoreAdmin">
 
     <ShellContent
@@ -15,7 +15,7 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.Home}" FontFamily="MaterialIcons" Color="White" />
+            <FontImageSource Glyph="{x:Static iconos:Iconos.home}" FontFamily="Iconos" Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -24,7 +24,7 @@
         ContentTemplate="{DataTemplate AppClass:ListaFavoritos}"
         Route="ListaFavoritos">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.Favourite}" FontFamily="MaterialIcons" Color="White" />
+            <FontImageSource Glyph="{x:Static iconos:Iconos.corazon}" FontFamily="Iconos" Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -33,7 +33,7 @@
         ContentTemplate="{DataTemplate AppClass:GestionProductos}"
         Route="GestionProductos">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.ManagementEdit}" FontFamily="MaterialIcons" Color="White" />
+            <FontImageSource Glyph="{x:Static iconos:Iconos.mail}" FontFamily="Iconos" Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -42,8 +42,8 @@
         ContentTemplate="{DataTemplate AppClass:CarritoCompra}"
         Route="CarritoCompra">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.Cart}" FontFamily="MaterialIcons" Color="White" />
+            <FontImageSource Glyph="{x:Static iconos:Iconos.carrito}" FontFamily="Iconos" Color="White" />
         </ShellContent.Icon>
     </ShellContent>
-
+    
 </Shell>

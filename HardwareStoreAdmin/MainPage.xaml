@@ -80,7 +80,7 @@
                 <Label
                     FontAttributes="Bold"
                     FontSize="20"
-                    Text="Categoría"
+                    Text="Filtros"
                     TextColor="White" />
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button

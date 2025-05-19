@@ -147,7 +147,7 @@
         <Border
             Grid.Row="1"
             BackgroundColor="White"
-            HeightRequest="90"
+            HeightRequest="60"
             HorizontalOptions="Fill"
             Stroke="#DDDDDD"
             VerticalOptions="End">
@@ -165,10 +165,6 @@
                                 Color="{x:StaticResource Naranja}" />
                         </Image.Source>
                     </Image>
-                    <Label
-                        FontSize="16"
-                        Text="Inicio"
-                        TextColor="{x:StaticResource Naranja}" />
                 </VerticalStackLayout>
 
                 <!--  Carrito  -->
@@ -184,10 +180,6 @@
                                 Color="Gray" />
                         </Image.Source>
                     </Image>
-                    <Label
-                        FontSize="16"
-                        Text="Carrito"
-                        TextColor="Gray" />
                 </VerticalStackLayout>
 
                 <!--  Favoritos  -->
@@ -203,10 +195,6 @@
                                 Color="Gray" />
                         </Image.Source>
                     </Image>
-                    <Label
-                        FontSize="16"
-                        Text="Favoritos"
-                        TextColor="Gray" />
                 </VerticalStackLayout>
 
                 <!--  Perfil  -->
@@ -222,10 +210,6 @@
                                 Color="Gray" />
                         </Image.Source>
                     </Image>
-                    <Label
-                        FontSize="16"
-                        Text="Perfil"
-                        TextColor="Gray" />
                 </VerticalStackLayout>
             </Grid>
         </Border>

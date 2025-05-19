@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using HardwareStoreAPI.Enumerado;
+using System.ComponentModel.DataAnnotations.Schema;
+using HardwareStoreAdmin.Enumerado;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
+using HardwareStoreAdmin.Modelo;
 
 namespace HardwareStoreAPI.Modelo
 {
@@ -18,6 +19,6 @@ namespace HardwareStoreAPI.Modelo
         {
             this.tipoPc = tipoPc;
         }
-        public Sobremesa() {}
+        public Sobremesa() { }
     }
 }

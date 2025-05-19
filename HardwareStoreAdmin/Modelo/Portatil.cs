@@ -24,6 +24,6 @@ namespace HardwareStoreAdmin.Modelo
             this.Pulgadas = pulgadas;
             this.Resolucion = resolucion;
         }
-        public Portatil() {}
+        public Portatil() { }
     }
 }

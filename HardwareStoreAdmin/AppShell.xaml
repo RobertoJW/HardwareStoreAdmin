@@ -3,19 +3,22 @@
     x:Class="HardwareStoreAdmin.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:AppClass="clr-namespace:HardwareStoreAdmin.AppClass"
+    xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
     xmlns:local="clr-namespace:HardwareStoreAdmin"
-    xmlns:AppClass ="clr-namespace:HardwareStoreAdmin.AppClass"
-    xmlns:iconos ="clr-namespace:HardwareStoreAdmin.Iconos"
+    Title="HardwareStoreAdmin"
     BackgroundColor="{StaticResource BGGris}"
-    Shell.FlyoutBehavior="Disabled"
-    Title="HardwareStoreAdmin">
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
         Title="Inicio"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.home}" FontFamily="Iconos" Color="White" />
+            <FontImageSource
+                FontFamily="Iconos"
+                Glyph="{x:Static iconos:Iconos.home}"
+                Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -24,7 +27,10 @@
         ContentTemplate="{DataTemplate AppClass:ListaFavoritos}"
         Route="ListaFavoritos">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.corazon}" FontFamily="Iconos" Color="White" />
+            <FontImageSource
+                FontFamily="Iconos"
+                Glyph="{x:Static iconos:Iconos.corazon}"
+                Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -33,7 +39,10 @@
         ContentTemplate="{DataTemplate AppClass:GestionProductos}"
         Route="GestionProductos">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.mail}" FontFamily="Iconos" Color="White" />
+            <FontImageSource
+                FontFamily="Iconos"
+                Glyph="{x:Static iconos:Iconos.mail}"
+                Color="White" />
         </ShellContent.Icon>
     </ShellContent>
 
@@ -42,8 +51,18 @@
         ContentTemplate="{DataTemplate AppClass:CarritoCompra}"
         Route="CarritoCompra">
         <ShellContent.Icon>
-            <FontImageSource Glyph="{x:Static iconos:Iconos.carrito}" FontFamily="Iconos" Color="White" />
+            <FontImageSource
+                FontFamily="Iconos"
+                Glyph="{x:Static iconos:Iconos.carrito}"
+                Color="White" />
         </ShellContent.Icon>
     </ShellContent>
-    
+
+    <FlyoutItem Title="Inicio de sesión / creación de cuenta">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Página principal">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
 </Shell>

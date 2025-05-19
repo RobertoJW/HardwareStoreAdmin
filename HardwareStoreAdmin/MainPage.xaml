@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
-             BackgroundColor="{StaticResource Gray100}"
-             x:Class="HardwareStoreAdmin.MainPage">
+<ContentPage
+    x:Class="HardwareStoreAdmin.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
+    BackgroundColor="{StaticResource GrisOscuro}">
 
     <!--  Estructura principal con 2 filas: contenido y menú  -->
     <Grid RowDefinitions="*,Auto">
@@ -14,125 +15,125 @@
 
                 <!--  Encabezado  -->
                 <Label
-                FontAttributes="Bold"
-                FontSize="24"
-                Text="¡Bienvenido/a!"
-                TextColor="#FF7F00" />
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    Text="¡Bienvenido/a!"
+                    TextColor="{x:StaticResource Naranja}" />
 
                 <!--  Búsqueda  -->
                 <Border
-                Padding="12"
-                BackgroundColor="#F0F0F0"
-                StrokeShape="RoundRectangle 12">
+                    Padding="12"
+                    BackgroundColor="White"
+                    StrokeShape="RoundRectangle 12">
                     <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
                         <Image HeightRequest="24" WidthRequest="24">
                             <Image.Source>
                                 <FontImageSource
-                                FontFamily="Iconos"
-                                Glyph="{x:Static iconos:Iconos.lupa}"
-                                Color="Gray" />
+                                    FontFamily="Iconos"
+                                    Glyph="{x:Static iconos:Iconos.lupa}"
+                                    Color="Gray" />
                             </Image.Source>
                         </Image>
                         <Entry
-                        Grid.Column="1"
-                        Margin="10,0,0,0"
-                        BackgroundColor="Transparent"
-                        FontSize="16"
-                        Placeholder="Buscar productos..."
-                        PlaceholderColor="Gray"
-                        TextColor="Black" />
+                            Grid.Column="1"
+                            Margin="10,0,0,0"
+                            BackgroundColor="Transparent"
+                            FontSize="16"
+                            Placeholder="Buscar productos..."
+                            PlaceholderColor="Gray"
+                            TextColor="Black" />
                     </Grid>
                 </Border>
 
                 <!--  Oferta  -->
                 <Border
-                Margin="0,10"
-                Padding="15"
-                BackgroundColor="#FFEBCD"
-                StrokeShape="RoundRectangle 20">
+                    Margin="0,10"
+                    Padding="15"
+                    BackgroundColor="#FFEBCD"
+                    StrokeShape="RoundRectangle 20">
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                         <VerticalStackLayout Grid.Column="0" Spacing="6">
                             <Label
-                            FontAttributes="Bold"
-                            FontSize="20"
-                            Text="¡Descuento especial!"
-                            TextColor="Black" />
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="¡Descuento especial!"
+                                TextColor="Black" />
                             <Label
-                            FontSize="24"
-                            Text="Hasta un 35%"
-                            TextColor="#FF7F00" />
+                                FontSize="24"
+                                Text="Hasta un 35%"
+                                TextColor="{x:StaticResource Naranja}" />
                             <Label
-                            FontSize="16"
-                            Text="Del 1 al 20 de junio"
-                            TextColor="Gray" />
+                                FontSize="16"
+                                Text="Del 1 al 20 de junio"
+                                TextColor="Gray" />
                         </VerticalStackLayout>
                         <Image
-                        Grid.Column="1"
-                        Aspect="AspectFit"
-                        HeightRequest="100"
-                        Source="pc.png"
-                        WidthRequest="100" />
+                            Grid.Column="1"
+                            Aspect="AspectFit"
+                            HeightRequest="100"
+                            Source="pc.png"
+                            WidthRequest="100" />
                     </Grid>
                 </Border>
 
                 <!--  Filtros  -->
                 <Label
-                FontAttributes="Bold"
-                FontSize="20"
-                Text="Categoría"
-                TextColor="Black" />
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Categoría"
+                    TextColor="White" />
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button
-                    BackgroundColor="#FF7F00"
-                    CornerRadius="20"
-                    Text="Todos"
-                    TextColor="White" />
+                        BackgroundColor="{x:StaticResource Naranja}"
+                        CornerRadius="20"
+                        Text="Todos"
+                        TextColor="White" />
                     <Button
-                    BackgroundColor="#FFE0B2"
-                    CornerRadius="20"
-                    Text="Portátil"
-                    TextColor="Black" />
+                        BackgroundColor="#FFE0B2"
+                        CornerRadius="20"
+                        Text="Portátil"
+                        TextColor="Black" />
                     <Button
-                    BackgroundColor="#FFE0B2"
-                    CornerRadius="20"
-                    Text="Sobremesa"
-                    TextColor="Black" />
+                        BackgroundColor="#FFE0B2"
+                        CornerRadius="20"
+                        Text="Sobremesa"
+                        TextColor="Black" />
                     <Button
-                    BackgroundColor="#FFE0B2"
-                    CornerRadius="20"
-                    Text="Móvil"
-                    TextColor="Black" />
+                        BackgroundColor="#FFE0B2"
+                        CornerRadius="20"
+                        Text="Móvil"
+                        TextColor="Black" />
                 </HorizontalStackLayout>
 
                 <!--  Título  -->
                 <Label
-                FontAttributes="Bold"
-                FontSize="20"
-                Text="Más vendidos"
-                TextColor="Black" />
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Más vendidos"
+                    TextColor="White" />
 
                 <!--  Lista de productos  -->
                 <CollectionView x:Name="ProductosCollection" ItemsLayout="VerticalList">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
-                            Margin="0,5"
-                            Padding="15"
-                            BackgroundColor="#2A2A2A"
-                            StrokeShape="RoundRectangle 12">
+                                Margin="0,5"
+                                Padding="15"
+                                BackgroundColor="#2A2A2A"
+                                StrokeShape="RoundRectangle 12">
                                 <VerticalStackLayout Spacing="10">
                                     <Label
-                                    FontSize="16"
-                                    Text="{Binding Nombre}"
-                                    TextColor="White" />
+                                        FontSize="16"
+                                        Text="{Binding Nombre}"
+                                        TextColor="White" />
                                     <Label
-                                    FontSize="12"
-                                    Text="{Binding Categoria}"
-                                    TextColor="Gray" />
+                                        FontSize="12"
+                                        Text="{Binding Categoria}"
+                                        TextColor="Gray" />
                                     <Label
-                                    FontSize="14"
-                                    Text="{Binding Precio}"
-                                    TextColor="#FF7F00" />
+                                        FontSize="14"
+                                        Text="{Binding Precio}"
+                                        TextColor="#FF7F00" />
                                 </VerticalStackLayout>
                             </Border>
                         </DataTemplate>
@@ -144,90 +145,89 @@
 
         <!--  MENÚ INFERIOR FIJO  -->
         <Border
-        Grid.Row="1"
-        BackgroundColor="White"
-        HeightRequest="90"
-        HorizontalOptions="Fill"
-        Stroke="#DDDDDD"
-        VerticalOptions="End">
+            Grid.Row="1"
+            BackgroundColor="White"
+            HeightRequest="90"
+            HorizontalOptions="Fill"
+            Stroke="#DDDDDD"
+            VerticalOptions="End">
             <Grid Padding="10" ColumnDefinitions="*,*,*,*">
                 <!--  Inicio  -->
                 <VerticalStackLayout
-                Grid.Column="0"
-                HorizontalOptions="Center"
-                Spacing="4">
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    Spacing="4">
                     <Image HeightRequest="32" WidthRequest="32">
                         <Image.Source>
                             <FontImageSource
-                            FontFamily="Iconos"
-                            Glyph="{x:Static iconos:Iconos.home}"
-                            Color="#FF7F00" />
+                                FontFamily="Iconos"
+                                Glyph="{x:Static iconos:Iconos.home}"
+                                Color="{x:StaticResource Naranja}" />
                         </Image.Source>
                     </Image>
                     <Label
-                    FontSize="16"
-                    Text="Inicio"
-                    TextColor="#FF7F00" />
+                        FontSize="16"
+                        Text="Inicio"
+                        TextColor="{x:StaticResource Naranja}" />
                 </VerticalStackLayout>
 
                 <!--  Carrito  -->
                 <VerticalStackLayout
-                Grid.Column="1"
-                HorizontalOptions="Center"
-                Spacing="4">
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Spacing="4">
                     <Image HeightRequest="32" WidthRequest="32">
                         <Image.Source>
                             <FontImageSource
-                            FontFamily="Iconos"
-                            Glyph="{x:Static iconos:Iconos.carrito}"
-                            Color="Gray" />
+                                FontFamily="Iconos"
+                                Glyph="{x:Static iconos:Iconos.carrito}"
+                                Color="Gray" />
                         </Image.Source>
                     </Image>
                     <Label
-                    FontSize="16"
-                    Text="Carrito"
-                    TextColor="Gray" />
+                        FontSize="16"
+                        Text="Carrito"
+                        TextColor="Gray" />
                 </VerticalStackLayout>
 
                 <!--  Favoritos  -->
                 <VerticalStackLayout
-                Grid.Column="2"
-                HorizontalOptions="Center"
-                Spacing="4">
+                    Grid.Column="2"
+                    HorizontalOptions="Center"
+                    Spacing="4">
                     <Image HeightRequest="32" WidthRequest="32">
                         <Image.Source>
                             <FontImageSource
-                            FontFamily="Iconos"
-                            Glyph="{x:Static iconos:Iconos.corazon}"
-                            Color="Gray" />
+                                FontFamily="Iconos"
+                                Glyph="{x:Static iconos:Iconos.corazon}"
+                                Color="Gray" />
                         </Image.Source>
                     </Image>
                     <Label
-                    FontSize="16"
-                    Text="Favoritos"
-                    TextColor="Gray" />
+                        FontSize="16"
+                        Text="Favoritos"
+                        TextColor="Gray" />
                 </VerticalStackLayout>
 
                 <!--  Perfil  -->
                 <VerticalStackLayout
-                Grid.Column="3"
-                HorizontalOptions="Center"
-                Spacing="4">
+                    Grid.Column="3"
+                    HorizontalOptions="Center"
+                    Spacing="4">
                     <Image HeightRequest="32" WidthRequest="32">
                         <Image.Source>
                             <FontImageSource
-                            FontFamily="Iconos"
-                            Glyph="{x:Static iconos:Iconos.usuario}"
-                            Color="Gray" />
+                                FontFamily="Iconos"
+                                Glyph="{x:Static iconos:Iconos.usuario}"
+                                Color="Gray" />
                         </Image.Source>
                     </Image>
                     <Label
-                    FontSize="16"
-                    Text="Perfil"
-                    TextColor="Gray" />
+                        FontSize="16"
+                        Text="Perfil"
+                        TextColor="Gray" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
-
     </Grid>
 </ContentPage>

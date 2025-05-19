@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,27 +8,26 @@ using System.Threading.Tasks;
 
 namespace HardwareStoreAdmin.Modelo
 {
-    public class Producto
+    public abstract class Producto
     {
         [Key] // Key tratará a id_producto como clave primaria y autoincremental
-        public int id_producto { get; set; }
-        public string imageUrl { get; set; }
-        public string companyBrand { get; set; }
-        public string nameProduct { get; set; }
-        public string description { get; set; }
-        public string category { get; set; }
-        public double price { get; set; }
+        public int IdProducto { get; set; }
+        public string ImagenUrl { get; set; }
+        public string NombreEmpresa { get; set; }
+        public string NombreProducto { get; set; }
+        public string Categoria { get; set; }
+        public decimal Precio { get; set; }
 
-        public string TipoProducto { get; set; }
+        // Relacion uno a uno
+        public virtual DescripcionGeneral? DescripcionGeneral { get; set; }
 
-        public Producto(string imageUrl, string companyBrand, string nameProduct, string description, string category, double price)
+        public Producto(string ImagenUrl, string NombreEmpresa, string NombreProducto, string Categoria, decimal Precio)
         {
-            this.imageUrl = imageUrl;
-            this.companyBrand = companyBrand;
-            this.nameProduct = nameProduct;
-            this.description = description;
-            this.category = category;
-            this.price = price;
+            this.ImagenUrl = ImagenUrl;
+            this.NombreEmpresa = NombreEmpresa;
+            this.NombreProducto = NombreProducto;
+            this.Categoria = Categoria;
+            this.Precio = Precio;
         }
 
         public Producto() { }

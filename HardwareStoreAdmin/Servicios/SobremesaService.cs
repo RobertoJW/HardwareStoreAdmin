@@ -13,6 +13,10 @@ namespace HardwareStoreAdmin.Servicios
     {
         private readonly HttpClient _httpClient;
 
+        public SobremesaService()
+        {
+            _httpClient = new HttpClient();
+        }
         public async Task<List<Sobremesa>> GetSobremesaAsync()
         {
             var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/productos/sobremesas");

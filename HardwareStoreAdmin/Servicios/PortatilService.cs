@@ -13,6 +13,11 @@ namespace HardwareStoreAdmin.Servicios
     {
         private readonly HttpClient _httpClient;
 
+        public PortatilService()
+        {
+            _httpClient = new HttpClient();
+        }
+
         public async Task<List<Portatil>> GetPortatilAsync()
         {
             var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/productos/portatiles");

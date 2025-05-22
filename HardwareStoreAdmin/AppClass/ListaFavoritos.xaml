@@ -30,9 +30,9 @@
                             <Grid Padding="10">
                                 <Border Style="{StaticResource BorderParaProductos}">
                                     <Grid>
-                                        <Image Source="{Binding imagenURL}" Aspect="Fill"/>
-                                        <Label Text="{Binding nombreProducto}" Style="{StaticResource LabelBorder}"/>
-                                        <Label Text="{Binding precio}" Style="{StaticResource LabelBorder}" TextColor="{StaticResource Naranja}"/>
+                                        <Image Source="{Binding ImagenUrl}" Aspect="Fill"/>
+                                        <Label Text="{Binding NombreProducto}" Style="{StaticResource LabelBorder}"/>
+                                        <Label Text="{Binding Precio, StringFormat='{}{0:€}'}" Style="{StaticResource LabelBorder}" TextColor="{StaticResource Naranja}"/>
                                     </Grid>
                                 </Border>
                                 <Grid.GestureRecognizers>
@@ -42,6 +42,10 @@
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <!--Si no encuentra nada, mostrará este mensaje-->
+                    <CollectionView.EmptyView>
+                        <Label Style="{StaticResource MensajeProductoVacio}"/>
+                    </CollectionView.EmptyView>
                 </CollectionView>
             </Border>
         </Grid>

@@ -12,6 +12,11 @@ namespace HardwareStoreAdmin.Servicios
     {
         private readonly HttpClient _httpClient;
 
+        public ProductoService()
+        {
+            _httpClient = new HttpClient();
+        }
+
         public async Task<List<Producto>> GetProductosAsync()
         {
             var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/productos");

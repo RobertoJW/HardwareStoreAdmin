@@ -589,5 +589,5 @@
         <Setter Property="HorizontalOptions" Value="Start"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
-    
+
 </ResourceDictionary>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HardwareStoreAdmin.Modelo;
+using HardwareStoreAdmin.Converter;
 
 namespace HardwareStoreAdmin.Servicios
 {
@@ -23,7 +24,14 @@ namespace HardwareStoreAdmin.Servicios
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<List<Producto>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                options.Converters.Add(new ProductoConverter());
+
+                return JsonSerializer.Deserialize<List<Producto>>(json, options);
             }
             return new List<Producto>();
         }

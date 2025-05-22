@@ -15,7 +15,7 @@ namespace HardwareStoreAdmin.Servicios
 
         public async Task<List<Movil>> GetMovilAsync()
         {
-            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/controladorusuarios");
+            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/productos/moviles");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

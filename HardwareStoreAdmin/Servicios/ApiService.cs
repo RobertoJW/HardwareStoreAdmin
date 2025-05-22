@@ -14,7 +14,5 @@ namespace HardwareStoreAdmin.Servicios
         {
             _httpClient = new HttpClient { BaseAddress = new Uri("https://hardwarestore-8071e.oa.r.appspot.com/")};
         }
-
-        
     }
 }

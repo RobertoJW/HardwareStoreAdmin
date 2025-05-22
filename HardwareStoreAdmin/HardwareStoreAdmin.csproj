@@ -69,13 +69,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AppClass\InterfazDetallesProducto.xaml.cs">
+	    <DependentUpon>InterfazDetallesProducto.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="AppClass\CarritoCompra.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppClass\GestionProductos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppClass\InterfazProducto.xaml">
+	  <MauiXaml Update="AppClass\InterfazDetallesProducto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppClass\ListaFavoritos.xaml">

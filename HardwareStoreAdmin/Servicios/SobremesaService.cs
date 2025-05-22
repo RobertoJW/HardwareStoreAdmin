@@ -15,7 +15,7 @@ namespace HardwareStoreAdmin.Servicios
 
         public async Task<List<Sobremesa>> GetSobremesaAsync()
         {
-            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/controladorusuarios");
+            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/productos/sobremesas");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

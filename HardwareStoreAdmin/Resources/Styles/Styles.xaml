@@ -484,5 +484,110 @@
         </Setter>
     </Style>
 
+    <!--Modificaciones Detalles Productos-->
 
+    <Style TargetType="Button" x:Key="ModButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource Naranja}"/>
+        <Setter Property="Text" Value="Añadir al carrito"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="NombreProductoMod">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="DescripcionProductoMod">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="PrecioProductoMod">
+        <Setter Property="TextColor" Value="{StaticResource Naranja}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BorderImagenProducto">
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="20,20,20,20"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ArroyBackMod">
+        <Setter Property="FontFamily" Value="Iconos"/>
+        <Setter Property="Text" Value="&#xe5c4;"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextColor" Value="{StaticResource GrisClaro}"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource GrisOscuro}"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="FavouriteIconMod">
+        <Setter Property="FontFamily" Value="Iconos"/>
+        <Setter Property="Text" Value="&#xe87d;"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextColor" Value="{StaticResource GrisClaro}"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource GrisOscuro}"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="MensajeProductoVacio">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="Text" Value="No hay productos disponibles."/>
+        <Setter Property="FontAttributes" Value="Italic"/>
+    </Style>
+
+    <!--Pagina lista de favoritos-->
+    <Style TargetType="Label" x:Key="TituloListaFavoritosPage">
+        <Setter Property="Text" Value="Favoritos"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="BtnModFavouritePage">
+        <Setter Property="BackgroundColor" Value="{StaticResource GrisClaro}"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="CornerRadius" Value="20"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BorderModListaFavorito">
+        <Setter Property="Grid.Row" Value="3"/>
+        <Setter Property="Grid.RowSpan" Value="2"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="30,30,30,30"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BorderParaProductos">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="30,30,30,30"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Label" x:Key="LabelBorder">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    
 </ResourceDictionary>

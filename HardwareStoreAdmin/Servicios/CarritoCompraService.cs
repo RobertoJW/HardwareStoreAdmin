@@ -15,7 +15,7 @@ namespace HardwareStoreAdmin.Servicios
 
         public async Task<List<CarritoCompra>> GetCarritoCompraAsync()
         {
-            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/controladorusuarios");
+            var response = await _httpClient.GetAsync("https://hardwarestore-8071e.oa.r.appspot.com/api/carritocompra");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

@@ -17,5 +17,6 @@ namespace HardwareStoreAdmin.Iconos
         public static string home = "\ue88a";
         public static string carrito = "\ue8cc";
         public static string corazon = "\ue87d";
+        public static string flecha_atras = "\ue5c4";
     }
 }

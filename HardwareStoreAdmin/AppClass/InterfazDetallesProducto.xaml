@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HardwareStoreAdmin.AppClass.InterfazProducto"
+             x:Class="HardwareStoreAdmin.AppClass.InterfazDetallesProducto"
              BackgroundColor="{StaticResource BGGris}"
-             Title="InterfazProducto">
+             Title="InterfazDetallesProducto">
 
     <Grid Margin="15" RowDefinitions=".4*,.1*,.1*,.4*">
         <!--Imagen del producto + iconos-->
-        <CollectionView x:Name="InformacionPrincipalProducto" ItemsSource="{Binding ProductoView}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <!--Imagen del producto + iconos de favoritos y volver-->
-                        <Border Grid.RowSpan="2" Style="{StaticResource BorderImagenProducto}">
-                            <Grid RowDefinitions=".3*,.7*">
-                                <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ImagenURL}"/>
+        <Border Grid.RowSpan="2">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20,20,20,20"/>
+            </Border.StrokeShape>
+            <Grid RowDefinitions=".3*,.7*">
+                <Image Grid.RowSpan="2"
+                       Aspect="AspectFill"
+                       Source="{Binding ImagenUrl}"/>
 
-                                <Grid ColumnDefinitions="*,*">
-                                    <Border Style="{StaticResource BorderMod1}">
-                                        <Button Style="{StaticResource ArroyBackMod}" Clicked="BtnVueltaPaginaPrincipal" x:Name="BtnArrowBack"/>
-                                    </Border>
-                                    <Border Style="{StaticResource BorderMod2}">
-                                        <Button Style="{StaticResource FavouriteIconMod}" Clicked="BtnProductoAListaDeFavoritos" x:Name="BtnFavourite"/>
-                                    </Border>
-                                </Grid>
-                            </Grid>
-                        </Border>
+                <Grid ColumnDefinitions="*,*">
+                    <Border Style="{StaticResource BorderMod1}">
+                        <Button Style="{StaticResource ArroyBackMod}" Clicked="BtnVueltaPaginaPrincipal" x:Name="BtnArrowBack"/>
+                    </Border>
+                    <Border Style="{StaticResource BorderMod2}">
+                        <Button Style="{StaticResource FavouriteIconMod}" Clicked="BtnProductoAListaDeFavoritos" x:Name="BtnFavourite"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
 
-                        <!--Informacion basica del producto-->
-                        <Border Style="{StaticResource BorderMod3}">
-                            <Grid Padding="20"
-                                  BackgroundColor="{StaticResource GrisOscuro}"
-                                  ColumnDefinitions=".5*,.25*,.25*"
-                                  RowDefinitions="*,*,*">
+        <!--Informacion basica del producto-->
+        <Border Style="{StaticResource BorderMod3}">
+            <Grid Padding="20"
+                  BackgroundColor="{StaticResource GrisOscuro}"
+                  ColumnDefinitions=".5*,.25*,.25*"
+                  RowDefinitions="*,*,*">
 
-                                <Label Text="{Binding NombreProducto}" Style="{StaticResource NombreProductoMod}" Grid.ColumnSpan="2"/>
-                                <Label Text="{Binding Precio}" Style="{StaticResource PrecioProductoMod}" Grid.Column="2"/>
-                                <Label Style="{StaticResource DescripcionProductoMod}" Text="{Binding NombreEmpresa}" Grid.Row="1"
-                                   Grid.ColumnSpan="2"/>
+                <Label Grid.ColumnSpan="2"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Text="{Binding NombreProducto}"
+                       TextColor="White"/>
 
-                                <Button Style="{StaticResource ModButton}" Grid.Row="2" Grid.Column="0"
-                                    Grid.ColumnSpan="3"/>
-                            </Grid>
-                        </Border>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <Label Grid.Column="2"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Text="{Binding Precio, StringFormat='{0}€'}"
+                       TextColor="{StaticResource Naranja}"/>
 
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       FontSize="15"
+                       TextColor="White"
+                       Text="{Binding NombreEmpresa}"/>
 
+                <Button Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        BackgroundColor="{StaticResource Naranja}"
+                        Text="Añadir al carrito"/>
+            </Grid>
+        </Border>
         <Grid Grid.Row="3" RowDefinitions=".4*,.4*,.2*">
             <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
                 <Label Text="Detalles del producto" FontSize="20" TextColor="White" FontAttributes="Bold"/>
                 <Label Text="HOLA" TextColor="White"/>
-                <CollectionView x:Name="DetallesProductos" ItemsSource="{Binding ProductView}" >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border>
-                                <Grid RowDefinitions="*,*,*,*,*,*,*">
-                                    <Label Grid.Row="0" Text="{Binding CPU, StringFormat='CPU: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="1" Text="{Binding RAM, StringFormat='RAM: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="2" Text="{Binding GPU, StringFormat='GPU: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="3" Text="{Binding Almacenamiento, StringFormat='Almacenamiento: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="4" Text="{Binding SistemaOperativo, StringFormat='Sistema Operativo: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="5" Text="{Binding Peso, StringFormat='Peso: {0}'}" TextColor="White"/>
-                                    <Label Grid.Row="6" Text="{Binding Dimensiones, StringFormat='Dimensiones: {0}'}" TextColor="White"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-                    <!--Si no encuentra nada, mostrará este mensaje-->
-                    <CollectionView.EmptyView>
-                        <Label Style="{StaticResource MensajeProductoVacio}"/>
-                    </CollectionView.EmptyView>
-                </CollectionView>
+                <Border>
+                    <Grid RowDefinitions="*,*,*,*,*,*,*">
+                        <Label Grid.Row="0" Text="{Binding CPU, StringFormat='CPU: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="1" Text="{Binding RAM, StringFormat='RAM: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="2" Text="{Binding GPU, StringFormat='GPU: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="3" Text="{Binding Almacenamiento, StringFormat='Almacenamiento: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="4" Text="{Binding SistemaOperativo, StringFormat='Sistema Operativo: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="5" Text="{Binding Peso, StringFormat='Peso: {0}'}" TextColor="White"/>
+                        <Label Grid.Row="6" Text="{Binding Dimensiones, StringFormat='Dimensiones: {0}'}" TextColor="White"/>
+                    </Grid>
+                </Border>
             </VerticalStackLayout>
         </Grid>
     </Grid>

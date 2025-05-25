@@ -545,6 +545,50 @@
         <Setter Property="FontAttributes" Value="Italic"/>
     </Style>
 
+    <!--Estilos para la página de producto-->
+    <!--Border para abarcar la imagen del producto-->
+    <Style TargetType="Border" x:Key="BorderMod1">
+        <Setter Property="Margin" Value="15,35,0,0"/>
+        <Setter Property="BackgroundColor" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="10,10,10,10"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BorderMod2">
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="Margin" Value="0,35,15,0"/>
+        <Setter Property="BackgroundColor" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="10,10,10,10"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BorderMod3">
+        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Grid.RowSpan" Value="2"/>
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}"/>
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="30,30,30,30"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--Pagina lista de favoritos-->
     <Style TargetType="Label" x:Key="TituloListaFavoritosPage">
         <Setter Property="Text" Value="Favoritos"/>

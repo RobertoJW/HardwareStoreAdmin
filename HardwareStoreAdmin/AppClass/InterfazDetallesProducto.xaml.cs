@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace HardwareStoreAdmin.AppClass;
 
-public partial class InterfazProducto : ContentPage
+public partial class InterfazDetallesProducto : ContentPage
 {
     bool esClicado = false;
 
-    public InterfazProducto()
+    public InterfazDetallesProducto()
 	{
 		InitializeComponent();
 	}

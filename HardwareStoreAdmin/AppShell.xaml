@@ -35,9 +35,9 @@
     </ShellContent>
 
     <ShellContent
-        Title="Gestionar Productos"
-        ContentTemplate="{DataTemplate AppClass:GestionProductos}"
-        Route="GestionProductos">
+        Title="Interfaz Detalles Productos"
+        ContentTemplate="{DataTemplate AppClass:InterfazDetallesProducto}"
+        Route="InterfazDetallesProducto">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="Iconos"

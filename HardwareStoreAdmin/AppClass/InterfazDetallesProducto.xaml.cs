@@ -1,4 +1,5 @@
 using HardwareStoreAdmin;
+using HardwareStoreAdmin.Modelo;
 using System.Threading.Tasks;
 
 namespace HardwareStoreAdmin.AppClass;
@@ -6,11 +7,13 @@ namespace HardwareStoreAdmin.AppClass;
 public partial class InterfazDetallesProducto : ContentPage
 {
     bool esClicado = false;
-
-    public InterfazDetallesProducto()
+    private Producto producto; 
+    public InterfazDetallesProducto(Producto producto)
 	{
 		InitializeComponent();
-	}
+        this.producto = producto; 
+        BindingContext = producto;
+    }
 
 	public async void BtnVueltaPaginaPrincipal(object sender, EventArgs e)
 	{

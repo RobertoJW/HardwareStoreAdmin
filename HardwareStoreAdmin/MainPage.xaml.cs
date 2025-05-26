@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
+using HardwareStoreAdmin.AppClass; 
 
 namespace HardwareStoreAdmin
 {
@@ -24,6 +25,18 @@ namespace HardwareStoreAdmin
             foreach (var producto in productos)
             {
                 Productos.Add(producto);
+            }
+        }
+
+        private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Producto productoSeleccionado)
+            {
+                // Quitamos la seleccion para evitar que quede seleccionado visualmente. 
+                ((CollectionView)sender).SelectedItem = null;
+
+                // navegamos a la página con el producto que hemos clicado. 
+                await Navigation.PushAsync(new InterfazDetallesProducto(productoSeleccionado));
             }
         }
     }

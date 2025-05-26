@@ -5,6 +5,7 @@
              BackgroundColor="{StaticResource BGGris}"
              Title="InterfazDetallesProducto">
 
+
     <Grid Margin="15" RowDefinitions=".4*,.1*,.1*,.4*">
         <!--Imagen del producto + iconos-->
         <Border Grid.RowSpan="2">
@@ -29,50 +30,50 @@
 
         <!--Informacion basica del producto-->
         <Border Style="{StaticResource BorderMod3}">
-            <Grid Padding="20"
+            <ScrollView>
+                <Grid Padding="20"
                   BackgroundColor="{StaticResource GrisOscuro}"
                   ColumnDefinitions=".5*,.25*,.25*"
                   RowDefinitions="*,*,*">
 
-                <Label Grid.ColumnSpan="2"
-                       FontAttributes="Bold"
-                       FontSize="20"
-                       Text="{Binding NombreProducto}"
-                       TextColor="White"/>
+                    <Label Text="{Binding NombreProducto, Converter={StaticResource TruncadorTexto}}"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource NombreProductoMod}"/>
 
-                <Label Grid.Column="2"
+                    <Label Grid.Column="2"
                        HorizontalTextAlignment="Center"
                        FontAttributes="Bold"
                        FontSize="20"
                        Text="{Binding Precio, StringFormat='{0}€'}"
                        TextColor="{StaticResource Naranja}"/>
 
-                <Label Grid.Row="1"
+                    <Label Grid.Row="1"
                        Grid.ColumnSpan="2"
                        FontSize="15"
                        TextColor="White"
                        Text="{Binding NombreEmpresa}"/>
 
-                <Button Grid.Row="2"
+                    <Button Grid.Row="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         BackgroundColor="{StaticResource Naranja}"
                         Text="Añadir al carrito"/>
-            </Grid>
+
+                </Grid>
+            </ScrollView>
         </Border>
-        <Grid Grid.Row="3" RowDefinitions=".4*,.4*,.2*">
+        <Grid Grid.Row="3" >
             <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
                 <Label Text="Detalles del producto" FontSize="20" TextColor="White" FontAttributes="Bold"/>
-                <Label Text="HOLA" TextColor="White"/>
-                <Border>
-                    <Grid RowDefinitions="*,*,*,*,*,*,*">
-                        <Label Grid.Row="0" Text="{Binding CPU, StringFormat='CPU: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="1" Text="{Binding RAM, StringFormat='RAM: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="2" Text="{Binding GPU, StringFormat='GPU: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="3" Text="{Binding Almacenamiento, StringFormat='Almacenamiento: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="4" Text="{Binding SistemaOperativo, StringFormat='Sistema Operativo: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="5" Text="{Binding Peso, StringFormat='Peso: {0}'}" TextColor="White"/>
-                        <Label Grid.Row="6" Text="{Binding Dimensiones, StringFormat='Dimensiones: {0}'}" TextColor="White"/>
+                <Border Style="{StaticResource BorderMod4}">
+                    <Grid RowDefinitions="Auto,*,*,*,*,*,*" Margin="15,15,0,0" RowSpacing="15">
+                        <Label Grid.Row="0" Text="{Binding DescripcionGeneral.CPU, StringFormat='CPU: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="1" Text="{Binding DescripcionGeneral.RAM, StringFormat='RAM: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="2" Text="{Binding DescripcionGeneral.GPU, StringFormat='GPU: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="3" Text="{Binding DescripcionGeneral.Almacenamiento, StringFormat='Almacenamiento: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="4" Text="{Binding DescripcionGeneral.SistemaOperativo, StringFormat='Sistema Operativo: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="5" Text="{Binding DescripcionGeneral.Peso, StringFormat='Peso: {0}.'}" TextColor="White"/>
+                        <Label Grid.Row="6" Text="{Binding DescripcionGeneral.Dimensiones, StringFormat='Dimensiones: {0}.'}" TextColor="White"/>
                     </Grid>
                 </Border>
             </VerticalStackLayout>

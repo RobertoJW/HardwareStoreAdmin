@@ -249,7 +249,9 @@
                 <CollectionView
                     Margin="10,10,10,10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
-                    ItemsSource="{Binding Productos}">
+                    ItemsSource="{Binding Productos}"
+                    SelectionMode="Single"
+                    SelectionChanged="OnProductoSeleccionado">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" />
                     </CollectionView.ItemsLayout>

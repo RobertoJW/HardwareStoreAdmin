@@ -253,7 +253,8 @@
                     SelectionMode="Single"
                     SelectionChanged="OnProductoSeleccionado">
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                        <GridItemsLayout Orientation="Vertical" Span="1"
+                                         VerticalItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
                 </CollectionView>
             </VerticalStackLayout>

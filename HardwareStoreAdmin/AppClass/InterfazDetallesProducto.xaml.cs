@@ -32,4 +32,14 @@ public partial class InterfazDetallesProducto : ContentPage
         // al clicar de vuelta el boton, cambiará de color
         esClicado = !esClicado;
     }
+
+    private async void Imagen_Tapped(object sender, EventArgs e)
+    {
+        var imagenUrl = (BindingContext as Producto)?.ImagenUrl;
+
+        if (!string.IsNullOrEmpty(imagenUrl))
+        {
+            await Navigation.PushModalAsync(new ImagenCompleta(imagenUrl));
+        }
+    }
 }

@@ -100,16 +100,19 @@ public partial class LoginPage : ContentPage
         {
             await DisplayAlert("Error", "Correo o contraseña incorrectos", "Aceptar");
             return;
+        } else
+        {
+            OnLoginSuccess();
         }
-
         await DisplayAlert("Bienvenido", "Inicio de sesión exitoso", "Continuar");
+
     }
     private async Task<bool> VerificarCredenciales(string email, string password)
     {
         await Task.Delay(1000); // Simula llamada a servidor
 
         // Sustituir por lógica real (API, base de datos, etc.)
-        return email == "test@correo.com" && password == "1234";
+        return email == "1@1.1" && password == "1";
     }
 
     private void OnCorreoTextChanged(object sender, TextChangedEventArgs e)
@@ -200,8 +203,11 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Error", "El usuario ya existe o el correo está en uso", "Aceptar");
             return;
         }
-
-        await DisplayAlert("Éxito", "Usuario registrado correctamente", "Aceptar");
+        else
+        {
+            OnLoginSuccess();
+            await DisplayAlert("Éxito", "Usuario registrado correctamente", "Aceptar");
+        }
     }
     private async Task<bool> RegistrarUsuario(string user, string email, string password)
     {
@@ -223,5 +229,16 @@ public partial class LoginPage : ContentPage
     {
         UserRegisterBorder.Stroke = Colors.Gray;
         UserErrorLabel.IsVisible = false;
+    }
+    private async void OnLoginSuccess()
+    {
+        // Navegar a la página principal
+        await Shell.Current.GoToAsync("//MainPage");
+
+        // Mostrar el TabBar
+        if (Shell.Current is AppShell appShell)
+        {
+            appShell.FindByName<TabBar>("MainTabBar").IsVisible = true;
+        }
     }
 }

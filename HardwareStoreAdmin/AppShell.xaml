@@ -8,61 +8,47 @@
     xmlns:local="clr-namespace:HardwareStoreAdmin"
     Title="HardwareStoreAdmin"
     BackgroundColor="{StaticResource BGGris}"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Inicio"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="Iconos"
-                Glyph="{x:Static iconos:Iconos.home}"
-                Color="White" />
-        </ShellContent.Icon>
-    </ShellContent>
+    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
 
-    <ShellContent
-        Title="Favoritos"
-        ContentTemplate="{DataTemplate AppClass:ListaFavoritos}"
-        Route="ListaFavoritos">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="Iconos"
-                Glyph="{x:Static iconos:Iconos.corazon}"
-                Color="White" />
-        </ShellContent.Icon>
-    </ShellContent>
+    <!--  TabBar principal (solo aparece tras login)  -->
+    <TabBar x:Name="MainTabBar">
 
-    <ShellContent
-        Title="Interfaz Detalles Productos"
-        ContentTemplate="{DataTemplate AppClass:InterfazDetallesProducto}"
-        Route="InterfazDetallesProducto">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="Iconos"
-                Glyph="{x:Static iconos:Iconos.mail}"
-                Color="White" />
-        </ShellContent.Icon>
-    </ShellContent>
+        <ShellContent
+            Title="Inicio"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Iconos"
+                    Glyph="{x:Static iconos:Iconos.home}"
+                    Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
 
-    <ShellContent
-        Title="Carrito de Compra"
-        ContentTemplate="{DataTemplate AppClass:CarritoCompra}"
-        Route="CarritoCompra">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="Iconos"
-                Glyph="{x:Static iconos:Iconos.carrito}"
-                Color="White" />
-        </ShellContent.Icon>
-    </ShellContent>
+        <ShellContent
+            Title="Favoritos"
+            ContentTemplate="{DataTemplate AppClass:ListaFavoritos}"
+            Route="Favoritos">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Iconos"
+                    Glyph="{x:Static iconos:Iconos.corazon}"
+                    Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
 
-    <FlyoutItem Title="Inicio de sesión / creación de cuenta">
-        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Página principal">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-    </FlyoutItem>
+        <ShellContent
+            Title="Carrito"
+            ContentTemplate="{DataTemplate AppClass:CarritoCompra}"
+            Route="CarritoCompra">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Iconos"
+                    Glyph="{x:Static iconos:Iconos.carrito}"
+                    Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </TabBar>
 </Shell>

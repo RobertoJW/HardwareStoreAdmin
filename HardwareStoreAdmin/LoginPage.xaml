@@ -4,8 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
-    xmlns:views="clr-namespace:HardwareStoreAdmin.Vistas"
-    Title="LoginPage">
+    xmlns:views="clr-namespace:HardwareStoreAdmin.Vistas">
     <Grid RowDefinitions=".3*, .8*">
         <Grid BackgroundColor="{x:StaticResource GrisOscuro}" />
 

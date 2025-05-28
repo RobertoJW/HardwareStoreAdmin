@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Text.RegularExpressions;
+using HardwareStoreAdmin.Servicios;
 
 namespace HardwareStoreAdmin;
 
@@ -8,7 +10,9 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
     }
+
     private int seleccion = 0;
+    private readonly UsuarioService _usuarioService = new UsuarioService();
 
     private async void OnLoginSelected(object sender, EventArgs e)
     {
@@ -109,16 +113,8 @@ public partial class LoginPage : ContentPage
     }
     private async Task<bool> VerificarCredenciales(string email, string password)
     {
-        await Task.Delay(1000); // Simula llamada a servidor
-
-        // Sustituir por lógica real (API, base de datos, etc.)
-        return email == "1@1.1" && password == "1";
-    }
-
-    private void OnCorreoTextChanged(object sender, TextChangedEventArgs e)
-    {
-        EmailLoginBorder.Stroke = Colors.Gray;
-        CorreoErrorLabel.IsVisible = false;
+        var usuario = await _usuarioService.VerificarCredencialesAsync(email, password);
+        return usuario != null;
     }
 
     private async void OnRegisterButtonClicked(object sender, EventArgs e)
@@ -211,13 +207,27 @@ public partial class LoginPage : ContentPage
     }
     private async Task<bool> RegistrarUsuario(string user, string email, string password)
     {
-        await Task.Delay(1000); // Simula llamada al servidor
+        var registrado = await _usuarioService.RegistrarUsuarioAsync(user, email, password);
 
-        // Simula validación
-        if (email == "existente@correo.com")
+        if (registrado == null)
+        {
+            Debug.WriteLine("[FALLO] El usuario no fue registrado. Posible error del servidor o datos inválidos.");
             return false;
+        }
 
         return true;
+    }
+
+    private async void OnLoginSuccess()
+    {
+        // Navegar a la página principal
+        await Shell.Current.GoToAsync("//MainPage");
+
+        // Mostrar el TabBar
+        if (Shell.Current is AppShell appShell)
+        {
+            appShell.FindByName<TabBar>("MainTabBar").IsVisible = true;
+        }
     }
 
     private void OnCorreoRegisterTextChanged(object sender, TextChangedEventArgs e)
@@ -230,15 +240,9 @@ public partial class LoginPage : ContentPage
         UserRegisterBorder.Stroke = Colors.Gray;
         UserErrorLabel.IsVisible = false;
     }
-    private async void OnLoginSuccess()
+    private void OnCorreoTextChanged(object sender, TextChangedEventArgs e)
     {
-        // Navegar a la página principal
-        await Shell.Current.GoToAsync("//MainPage");
-
-        // Mostrar el TabBar
-        if (Shell.Current is AppShell appShell)
-        {
-            appShell.FindByName<TabBar>("MainTabBar").IsVisible = true;
-        }
+        EmailLoginBorder.Stroke = Colors.Gray;
+        CorreoErrorLabel.IsVisible = false;
     }
 }

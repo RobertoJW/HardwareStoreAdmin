@@ -9,23 +9,22 @@
     Title="HardwareStoreAdmin"
     BackgroundColor="{StaticResource BGGris}"
     Shell.FlyoutBehavior="Disabled">
-    
+
     <Shell.Resources>
         <Style TargetType="Shell">
             <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
-            <Setter Property="Shell.TabBarSelectedColor" Value="{StaticResource Naranja}" />
             <Setter Property="Shell.TabBarUnselectedColor" Value="Gray" />
             <Setter Property="Shell.TabBarHeight" Value="70" />
             <Setter Property="Shell.TabBarTitleFontSize" Value="14" />
         </Style>
     </Shell.Resources>
-    
+
     <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
 
-    
+
     <!--  TabBar principal (solo aparece tras login)  -->
     <TabBar x:Name="MainTabBar">
-    
+
         <ShellContent
             Title="Inicio"
             ContentTemplate="{DataTemplate local:MainPage}"

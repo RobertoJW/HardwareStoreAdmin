@@ -57,22 +57,36 @@ namespace HardwareStoreAdmin.Servicios
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"[ERROR HTTP] Código: {response.StatusCode}");
-                    Debug.WriteLine($"[ERROR BODY] Respuesta: {contenido}");
+                    Debug.WriteLine($"[HTTP ERROR] StatusCode: {response.StatusCode}");
+                    Debug.WriteLine($"[BODY] {contenido}");
                     return null;
                 }
 
-                return JsonSerializer.Deserialize<Usuario>(contenido, new JsonSerializerOptions
+                try
                 {
-                    PropertyNameCaseInsensitive = true
-                });
+                    var usuarioCreado = JsonSerializer.Deserialize<Usuario>(contenido, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (usuarioCreado == null)
+                    {
+                        Debug.WriteLine("[DESERIALIZACIÓN] El objeto deserializado es null");
+                    }
+
+                    return usuarioCreado;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[EXCEPCIÓN DESERIALIZACIÓN] {ex.Message}");
+                    return null;
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[EXCEPCIÓN] Error en RegistrarUsuarioAsync: {ex.Message}");
+                Debug.WriteLine($"[EXCEPCIÓN HTTP] {ex.Message}");
                 return null;
             }
         }
-
     }
 }

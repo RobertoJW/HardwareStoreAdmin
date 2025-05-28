@@ -207,16 +207,25 @@ public partial class LoginPage : ContentPage
     }
     private async Task<bool> RegistrarUsuario(string user, string email, string password)
     {
-        var registrado = await _usuarioService.RegistrarUsuarioAsync(user, email, password);
-
-        if (registrado == null)
+        try
         {
-            Debug.WriteLine("[FALLO] El usuario no fue registrado. Posible error del servidor o datos inválidos.");
+            var usuario = await _usuarioService.RegistrarUsuarioAsync(user, email, password);
+            if (usuario == null)
+            {
+                Debug.WriteLine("[FALLO] No se pudo crear el usuario.");
+                return false;
+            }
+
+            Debug.WriteLine("[ÉXITO] Usuario creado con ID: " + usuario.userId);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("[EXCEPCIÓN] " + ex.Message);
             return false;
         }
-
-        return true;
     }
+
 
     private async void OnLoginSuccess()
     {

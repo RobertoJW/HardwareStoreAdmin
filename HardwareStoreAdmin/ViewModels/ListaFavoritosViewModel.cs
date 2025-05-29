@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,7 +15,10 @@ namespace HardwareStoreAdmin.ViewModels
     public class ListaFavoritosViewModel
     {
         private readonly ListaFavoritoService _listaFavoritoService = new();
-        public ObservableCollection<ListaFavoritos> ListaFavoritos { get; set; } = new();
+        //public ObservableCollection<ListaFavoritos> ListaFavoritos { get; set; } = new();
+
+        // Estoy usando la colección de productos porque lo que yo quiero cargar son los Productos. 
+        public ObservableCollection<Producto> Productos { get; set; } = new();
 
         // si es true, la app está cargando los productos, si es false, todos los productos ya se han cargado
         private bool estaCargando;
@@ -41,12 +45,17 @@ namespace HardwareStoreAdmin.ViewModels
             isCargando = true;
 
             var lista = await _listaFavoritoService.GetListaFavoritoServiceAsync();
-            ListaFavoritos.Clear();
+            Productos.Clear();
 
-            foreach (var sb in lista)
+            foreach (var favoritos in lista)
             {
-                ListaFavoritos.Add(sb);
+                foreach (var productos in favoritos.Productos)
+                {
+                    Productos.Add(productos);
+                }
+                
             }
+            Debug.WriteLine($"Productos cargados: {Productos.Count}");
             isCargando = false;
         }
 

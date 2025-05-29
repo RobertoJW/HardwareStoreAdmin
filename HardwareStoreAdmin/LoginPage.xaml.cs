@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using HardwareStoreAdmin.Servicios;
+using HardwareStoreAdmin.Modelo;
 
 namespace HardwareStoreAdmin;
 
@@ -98,23 +99,23 @@ public partial class LoginPage : ContentPage
             hayError = true;
         }
         if (hayError) return;
-        bool credencialesCorrectas = await VerificarCredenciales(email, contraseña);
+        var usuario = await VerificarCredenciales(email, contraseña);
 
-        if (!credencialesCorrectas)
+        if (usuario == null)
         {
             await DisplayAlert("Error", "Correo o contraseña incorrectos", "Aceptar");
             return;
         } else
         {
+            App.UsuarioActual = usuario;
             OnLoginSuccess();
+            await DisplayAlert("Bienvenido", "Inicio de sesión exitoso", "Continuar");
         }
-        await DisplayAlert("Bienvenido", "Inicio de sesión exitoso", "Continuar");
 
     }
-    private async Task<bool> VerificarCredenciales(string email, string password)
+    private async Task<Usuario?> VerificarCredenciales(string email, string password)
     {
-        var usuario = await _usuarioService.VerificarCredencialesAsync(email, password);
-        return usuario != null;
+        return await _usuarioService.VerificarCredencialesAsync(email, password);
     }
 
     private async void OnRegisterButtonClicked(object sender, EventArgs e)

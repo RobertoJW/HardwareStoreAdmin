@@ -78,9 +78,6 @@
 	  <MauiXaml Update="AppClass\CarritoCompra.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppClass\GestionProductos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="AppClass\ImagenCompleta.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -2,11 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
+             BackgroundColor="White"
              Title="CarritoCompra">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid>
+        <!-- Título en fila 0 -->
+        <Label Text="Carrito de Compra" Grid.Row="0" Style="{StaticResource TituloCarritoCompra}"/>
+
+        <!-- Border que envuelve el CollectionView en fila 1 -->
+        <Border Style="{StaticResource BorderModListaFavorito}">
+            <CollectionView ItemsSource="{Binding Productos}" x:Name="ListaFavoritos">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Border Style="{StaticResource BorderParaProductos}">
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
+                                    <Image Source="{Binding ImagenUrl}" Aspect="Fill" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+                                    <Label Text="{Binding NombreProducto}" Style="{StaticResource LabelBorder}" Grid.Column="1" Grid.Row="0"/>
+                                    <Label Text="{Binding Precio, StringFormat='{}{0:€}'}" Style="{StaticResource LabelBorder}" TextColor="{StaticResource Naranja}"
+                                           Grid.Column="1" Grid.Row="1"/>
+                                    <Button Style="{StaticResource BotonEliminarProductoCarritoCompra}" Grid.Row="2" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionadorProductoComando, Source={x:Reference ListaFavoritos}}" 
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Style="{StaticResource MensajeProductoVacio}" Text="Tu carrito está vacío."/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Border>
+    </Grid>
 </ContentPage>

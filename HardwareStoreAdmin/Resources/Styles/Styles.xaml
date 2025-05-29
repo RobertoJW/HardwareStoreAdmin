@@ -629,7 +629,7 @@
         <Setter Property="Grid.Row" Value="3" />
         <Setter Property="Grid.RowSpan" Value="2" />
         <Setter Property="BackgroundColor" Value="White" />
-        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}" />
+        <Setter Property="Stroke" Value="Transparent" />
         <Setter Property="StrokeShape">
             <Setter.Value>
                 <RoundRectangle CornerRadius="30,30,0,0" />
@@ -654,4 +654,34 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
+    <!--Pagina carrito de compra-->
+    <Style x:Key="LabelCarritoCompraVacio" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"  />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Opacity" Value="0.7"/>
+    </Style>
+
+    <Style x:Key="BotonEliminarProductoCarritoCompra" TargetType="Button">
+        <Setter Property="Text" Value="&#xe5c4;"/>
+        <Setter Property="TextColor" Value="Red"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="TituloCarritoCompra" TargetType="Label">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+
+    <Style x:Key="BorderModCarritoCompra" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="Stroke" Value="{x:StaticResource GrisOscuro}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="30,30,0,0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

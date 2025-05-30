@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using HardwareStoreAdmin.Modelo;
+using HardwareStoreAdmin.Converter;
+
 
 namespace HardwareStoreAdmin.Servicios
 {

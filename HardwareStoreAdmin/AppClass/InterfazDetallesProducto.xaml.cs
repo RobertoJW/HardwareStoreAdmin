@@ -40,7 +40,7 @@ public partial class InterfazDetallesProducto : ContentPage
 
     public async void BtnVueltaPaginaPrincipal(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//MainPage");
+        await Shell.Current.GoToAsync("..");
     }
 
     private async void Imagen_Tapped(object sender, EventArgs e)

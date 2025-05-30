@@ -18,6 +18,6 @@ namespace HardwareStoreAdmin.Modelo
         public virtual Usuario? Usuario { get; set; }
 
         // Una lista puede tener muchos productos   
-        public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
+        public virtual List<Producto> Productos { get; set; } = new List<Producto>();
     }
 }

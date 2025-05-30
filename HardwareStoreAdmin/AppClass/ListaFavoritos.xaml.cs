@@ -14,7 +14,8 @@ public partial class ListaFavoritos : ContentPage
         InitializeComponent();
         _listaFavoritoViewModel = new ListaFavoritosViewModel();
         BindingContext = _listaFavoritoViewModel;
-        CargarDatosAsync();
+        int userId = Preferences.Get("userId", 0);
+        _listaFavoritoViewModel.CargarListaFavoritos(userId);
     }
 
     private void BtnFilterDesktop(object sender, EventArgs e)
@@ -30,19 +31,5 @@ public partial class ListaFavoritos : ContentPage
     private void BtnFilterPhone(object sender, EventArgs e)
     {
 
-    }
-
-    private async void CargarDatosAsync()
-    {
-        try
-        {
-            await _listaFavoritoViewModel.CargarListaFavoritos();
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Error cargando productos: {ex.Message}");
-            // Aquí puedes mostrar un alert si quieres
-            await DisplayAlert("Error", $"No se pudieron cargar los productos: {ex.Message}", "OK");
-        }
     }
 }

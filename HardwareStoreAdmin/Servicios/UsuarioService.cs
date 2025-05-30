@@ -27,6 +27,32 @@ namespace HardwareStoreAdmin.Servicios
             return new List<Usuario>();
         }
 
+        public async Task<Usuario> GetUsuarioConFavoritosAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    Converters = { new ProductoConverter() }
+                };
+                return JsonSerializer.Deserialize<Usuario>(json, options);
+            }
+            return null;
+        }
+
+        public async Task<Usuario?> GetUsuarioByIdAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
+            if (!response.IsSuccessStatusCode) return null;
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Usuario>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+
         public async Task<Usuario?> VerificarCredencialesAsync(string email, string password)
         {
             var usuarioLogin = new Usuario

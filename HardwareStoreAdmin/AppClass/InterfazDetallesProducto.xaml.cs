@@ -8,82 +8,34 @@ namespace HardwareStoreAdmin.AppClass;
 
 public partial class InterfazDetallesProducto : ContentPage
 {
-    bool esClicado = false;
     private Producto producto;
-
+    private ProductoFavoritoViewModel viewModel;
     private readonly ListaFavoritoService favoritoService = new ListaFavoritoService();
+    private readonly UsuarioService usuarioService = new UsuarioService();
 
     public InterfazDetallesProducto(Producto producto)
     {
         InitializeComponent();
         this.producto = producto;
-        BindingContext = producto;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await InicializarEstadoFavoritoAsync();
-    }
 
-    private async Task InicializarEstadoFavoritoAsync()
-    {
-        if (App.UsuarioActual == null)
-        {
-            esClicado = false;
-            BtnFavourite.TextColor = (Color)Application.Current.Resources["GrisClaro"];
-            return;
-        }
-
-        var favoritos = await favoritoService.GetListaFavoritoServiceAsync();
-
-        // Obtener la lista del usuario actual
-        var listaUsuario = favoritos.FirstOrDefault(f => f.userId == App.UsuarioActual.userId);
-
-        // Verificar si su lista contiene el producto actual
-        esClicado = listaUsuario?.Productos.Any(p => p.IdProducto == producto.IdProducto) ?? false;
-
-        BtnFavourite.TextColor = esClicado ? Colors.Red : (Color)Application.Current.Resources["GrisClaro"];
-    }
-
-
-    private async void BtnProductoAListaDeFavoritos(object sender, EventArgs e)
-    {
         if (App.UsuarioActual == null)
         {
             await DisplayAlert("Atención", "Debes iniciar sesión para usar favoritos.", "OK");
             return;
         }
 
-        var button = (Button)sender;
-        if (button == null) return;
+        var usuario = await usuarioService.GetUsuarioConFavoritosAsync(App.UsuarioActual.userId);
 
-        if (!esClicado)
-        {
-            bool agregado = await favoritoService.AgregarAFavoritos(App.UsuarioActual.userId, producto.IdProducto);
-            if (agregado)
-            {
-                button.TextColor = Colors.Red;
-                esClicado = true;
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo agregar a favoritos", "OK");
-            }
-        }
-        else
-        {
-            bool eliminado = await favoritoService.QuitarDeFavoritos(App.UsuarioActual.userId, producto.IdProducto);
-            if (eliminado)
-            {
-                button.TextColor = (Color)Application.Current.Resources["GrisClaro"];
-                esClicado = false;
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo eliminar de favoritos", "OK");
-            }
-        }
+        bool esFavorito = usuario?.ListaFavoritos?.Productos?.Any(p => p.IdProducto == producto.IdProducto) ?? false;
+
+        viewModel = new ProductoFavoritoViewModel(producto, esFavorito, App.UsuarioActual.userId, favoritoService);
+        BindingContext = viewModel;
+        Debug.WriteLine($"Producto {producto.NombreProducto} es favorito: {esFavorito}");
     }
 
     public async void BtnVueltaPaginaPrincipal(object sender, EventArgs e)

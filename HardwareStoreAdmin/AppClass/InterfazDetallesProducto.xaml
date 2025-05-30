@@ -27,7 +27,9 @@
                         <Button Style="{StaticResource ArroyBackMod}" Clicked="BtnVueltaPaginaPrincipal" x:Name="BtnArrowBack"/>
                     </Border>
                     <Border Style="{StaticResource BorderMod2}">
-                        <Button Style="{StaticResource FavouriteIconMod}" Clicked="BtnProductoAListaDeFavoritos" x:Name="BtnFavourite"/>
+                        <Button Style="{StaticResource FavouriteIconMod}"
+                            TextColor="{Binding ColorFavorito}" 
+                            Command="{Binding ToggleFavoritoCommand}" />
                     </Border>
                 </Grid>
             </Grid>

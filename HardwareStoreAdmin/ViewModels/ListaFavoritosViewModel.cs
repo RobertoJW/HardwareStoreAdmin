@@ -9,16 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
+using HardwareStoreAdmin.ViewModels;
 
 namespace HardwareStoreAdmin.ViewModels
 {
-    public class ListaFavoritosViewModel
+    public class ListaFavoritosViewModel : INotifyPropertyChanged
     {
-        private readonly ListaFavoritoService _listaFavoritoService = new();
-        //public ObservableCollection<ListaFavoritos> ListaFavoritos { get; set; } = new();
+        private readonly UsuarioService _usuarioService = new();
+        private readonly ListaFavoritoService _favService = new();
+        public ObservableCollection<ProductoFavoritoViewModel> Productos { get; } = 
+            new ObservableCollection<ProductoFavoritoViewModel>();
 
-        // Estoy usando la colección de productos porque lo que yo quiero cargar son los Productos. 
-        public ObservableCollection<Producto> Productos { get; set; } = new();
+        public Command<int> CargarListaFavoritosComando { get; }
 
         // si es true, la app está cargando los productos, si es false, todos los productos ya se han cargado
         private bool estaCargando;
@@ -33,28 +35,32 @@ namespace HardwareStoreAdmin.ViewModels
         }
         public ListaFavoritosViewModel()
         {
-            CargarListaFavoritosComando = new Command(async () => await CargarListaFavoritos());
-            _ = CargarListaFavoritos(); // carga automatica de productos al abrir
+            CargarListaFavoritosComando = new Command<int>(
+            async userId => await CargarListaFavoritos(userId)
+            );
         }
 
-        public Command CargarListaFavoritosComando { get; }
-
-        public async Task CargarListaFavoritos()
+        public async Task CargarListaFavoritos(int userId)
         {
+            var usuario = await _usuarioService.GetUsuarioByIdAsync(userId);
+            Productos.Clear();
+
+            var favoritos = usuario?.ListaFavoritos?.Productos ?? Enumerable.Empty<Producto>();
+            var productosFavoritos = new HashSet<int>(favoritos.Select(p => p.IdProducto));
+
             if (isCargando) return;
             isCargando = true;
 
-            var lista = await _listaFavoritoService.GetListaFavoritoServiceAsync();
-            Productos.Clear();
-
-            foreach (var favoritos in lista)
+            // cargamos los datos del usuario
+            foreach (var producto in favoritos)
             {
-                foreach (var productos in favoritos.Productos)
-                {
-                    Productos.Add(productos);
-                }
-                
+                Productos.Add(new ProductoFavoritoViewModel(
+                    producto,
+                    esFavorito: true,
+                    userId,
+                    _favService));
             }
+
             Debug.WriteLine($"Productos cargados: {Productos.Count}");
             isCargando = false;
         }

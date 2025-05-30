@@ -19,6 +19,7 @@ namespace HardwareStoreAdmin.Servicios
         {
             _httpClient = new HttpClient();
         }
+
         public async Task<List<ListaFavoritos>> GetListaFavoritoServiceAsync()
         {
             var response = await _httpClient.GetAsync(baseUrl);
@@ -29,6 +30,7 @@ namespace HardwareStoreAdmin.Servicios
             }
             return new List<ListaFavoritos>();
         }
+
         public async Task<bool> AgregarAFavoritos(int userId, int productoId)
         {
             var data = new
@@ -48,6 +50,7 @@ namespace HardwareStoreAdmin.Servicios
 
             return response.IsSuccessStatusCode;
         }
+
         public async Task<bool> QuitarDeFavoritos(int userId, int productoId)
         {
             var data = new

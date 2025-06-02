@@ -48,6 +48,7 @@ namespace HardwareStoreAdmin.Servicios
             return producto;
         }
 
+        // METODOS PARA FILTROS Y PARA LA BARRA DE BÚSQUEDA.
         public async Task<List<Producto>> GetProductoFiltrado(string categoria)
         {
             // cargamos todos los productos
@@ -62,18 +63,28 @@ namespace HardwareStoreAdmin.Servicios
             return producto;
         }
 
-        public async Task<List<Producto>> GetProductoFiltradoDeUsuario(string categoria, int userId)
+        public async Task<List<Producto>> GetProductoFiltradoSearchBar(string textoBusqueda, string datoSeleccionado)
         {
             // cargamos todos los productos
             var todosLosProductos = await GetProductosAsync();
 
-            // buscamos el producto por su id
-            var producto = todosLosProductos.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-            if (producto.Count == null)
-                throw new KeyNotFoundException($"Productos con categoria {categoria} no encontrados.");
+            if (datoSeleccionado == "Todo")
+            {
+                return todosLosProductos.Where(p => p.NombreEmpresa.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase) 
+                || p.NombreProducto.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            else
+            {
+                var productoFiltrado = todosLosProductos
+                    .Where(p =>
+                    {
+                        // obtenemos el tipo de objeto (Producto), luego un atributo del objeto (datoSeleccionado) y finalmente su valor como texto.
+                        var valorTextoBusqueda = p.GetType()?.GetProperty(datoSeleccionado)?.GetValue(p)?.ToString();
+                        return valorTextoBusqueda != null && valorTextoBusqueda.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase);
+                    }).ToList();
 
-            return producto;
+                return productoFiltrado;
+            }
         }
     }
 }

@@ -65,11 +65,11 @@ public partial class ListaFavoritos : ContentPage
 
         if (categoria == "Todos")
         {
-            productosFiltrados = await _productoService.GetProductosAsync();
+            productosFiltrados = await _usuarioService.GetTodosLosProductosListaFavoritos(categoria, App.UsuarioActual.userId);
         }
         else
         {
-            productosFiltrados = await _productoService.GetProductoFiltrado(categoria);
+            productosFiltrados = await _usuarioService.GetProductoFiltradoFavorito(categoria, App.UsuarioActual.userId);
         }
 
         Productos.Clear();

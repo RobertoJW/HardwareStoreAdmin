@@ -11,6 +11,7 @@ namespace HardwareStoreAdmin.Servicios
     public class UsuarioService
     {
         private readonly HttpClient _httpClient;
+        private ProductoService _productoService = new ProductoService(); 
         private readonly string baseUrl = "https://hardwarestore-8071e.oa.r.appspot.com/api/usuarios";
 
         public UsuarioService()
@@ -18,6 +19,7 @@ namespace HardwareStoreAdmin.Servicios
             _httpClient = new HttpClient();
         }
 
+        // metodo para obtener todos los usuarios de la base de datos.
         public async Task<List<Usuario>> GetUsuariosAsync()
         {
             var response = await _httpClient.GetAsync(baseUrl);
@@ -29,6 +31,7 @@ namespace HardwareStoreAdmin.Servicios
             return new List<Usuario>();
         }
 
+        // metodo para obtener un usuario por su id.
         public async Task<Usuario?> GetUsuarioByIdAsync(int userId)
         {
             var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
@@ -38,6 +41,7 @@ namespace HardwareStoreAdmin.Servicios
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
+        // metodo para verificar si un usuario existe en la base de datos
         public async Task<Usuario?> VerificarCredencialesAsync(string email, string password)
         {
             var usuarioLogin = new Usuario
@@ -52,6 +56,7 @@ namespace HardwareStoreAdmin.Servicios
             return await response.Content.ReadFromJsonAsync<Usuario>();
         }
 
+        // Metodo para registrar un nuevo usuario.
         public async Task<Usuario?> RegistrarUsuarioAsync(string nombre, string email, string password)
         {
             var nuevoUsuario = new Usuario
@@ -100,6 +105,7 @@ namespace HardwareStoreAdmin.Servicios
             }
         }
 
+        // método para mostrar toda la informacion de UN usuario en concreto. 
         public async Task<Usuario> GetProductoPorIdUsuarioAsync(int userId)
         {
             var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
@@ -117,6 +123,50 @@ namespace HardwareStoreAdmin.Servicios
             return null;
         }
 
+        // METODOS PARA FILTROS Y BARRA DE BUSQUEDA
+        // metodo para mostrar TODOS los productos de la lista de favoritos.
+        public async Task<List<Producto>> GetTodosLosProductosListaFavoritos(string categoria, int userId)
+        {
+            // cargamos todos los productos
+            var todosLosProductos = await _productoService.GetProductosAsync();
 
+            // obtener usuario con su lista de favoritos
+            var usuarioFavorito = await GetProductoPorIdUsuarioAsync(userId);
+
+            if (usuarioFavorito?.ListaFavoritos?.Productos == null)
+                return new List<Producto>(); // si no hay productos en la lista de favoritos, nos devolverá una lista vacía. 
+
+            // Sacamos los productos favoritos del usuario
+            var productosFavoritos = usuarioFavorito.ListaFavoritos.Productos.Select(p => p.IdProducto).ToHashSet();
+
+            // filtramos los productos que están en favoritos y en la categoria seleccionada
+            var favoritos = todosLosProductos.Where(p => productosFavoritos.Contains(p.IdProducto)).ToList();
+
+            return favoritos;
+        }
+
+        // metodo para ayudarnos a filtrar los productos de la lista de favoritos de un usuario.
+        public async Task<List<Producto>> GetProductoFiltradoFavorito(string categoria, int userId)
+        {
+            // cargamos todos los productos
+            var todosLosProductos = await _productoService.GetProductosAsync();
+
+            // obtener usuario con su lista de favoritos
+            var usuarioFavorito = await GetProductoPorIdUsuarioAsync(userId);
+
+            if (usuarioFavorito?.ListaFavoritos?.Productos == null)
+                return new List<Producto>(); // si no hay productos en la lista de favoritos, nos devolverá una lista vacía. 
+
+            // Sacamos los productos favoritos del usuario
+            var productosFavoritos = usuarioFavorito.ListaFavoritos.Productos.Select(p => p.IdProducto).ToHashSet();
+
+            // filtramos los productos que están en favoritos y en la categoria seleccionada
+            var producto = todosLosProductos
+                .Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase) &&
+                            productosFavoritos.Contains(p.IdProducto))
+                .ToList();
+
+            return producto;
+        }
     }
 }

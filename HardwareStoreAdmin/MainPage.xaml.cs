@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
-using HardwareStoreAdmin.AppClass; 
+using HardwareStoreAdmin.AppClass;
+using System.Threading.Tasks;
 
 namespace HardwareStoreAdmin
 {
@@ -13,10 +14,18 @@ namespace HardwareStoreAdmin
 
         List<Button> botonesFiltro;
 
+        private Dictionary<string, string> filtros = new()
+        {
+            { "Todo", "Todo" },
+            { "Nombre del producto", "NombreProducto" },
+            { "Marca", "NombreEmpresa" }
+        };
+
         public MainPage()
         {
             InitializeComponent();
             BindingContext = this;
+            PickerProducto.ItemsSource = filtros.Keys.ToList();
             LoadProductos();
         }
 
@@ -69,6 +78,22 @@ namespace HardwareStoreAdmin
             foreach (var producto in productosFiltrados)
             {
                 Productos.Add(producto);
+            }
+        }
+
+        private async void BuscarProductoBtn(object sender, EventArgs e)
+        {
+            // recoge lo que está escrito en el buscador y lo que se ha elegido en el picker. 
+            var textoBusqueda = busquedaProductoTxt.Text?.Trim();
+            var filtroSeleccionado = PickerProducto.SelectedItem as string;
+
+            string datoSeleccionado = filtros.ContainsKey(filtroSeleccionado) ? filtros[filtroSeleccionado] : "Todo";
+            var resultado = await _productoService.GetProductoFiltradoSearchBar(textoBusqueda, datoSeleccionado);
+
+            Productos.Clear();
+            foreach (var producto in resultado)
+            {
+                Productos.Add(producto); 
             }
         }
     }

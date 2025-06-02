@@ -23,7 +23,7 @@ public static class MauiProgram
             });
 
 		// Sentencia fundamental para establecer conexion con la base de datos y realizar operaciones. 
-		builder.Services.AddSingleton<ApiService>();
+		//builder.Services.AddSingleton<ApiService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

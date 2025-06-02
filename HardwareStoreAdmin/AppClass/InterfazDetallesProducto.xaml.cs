@@ -28,11 +28,10 @@ public partial class InterfazDetallesProducto : ContentPage
 
         var userId = App.UsuarioActual.userId;
 
-        var usuario = await usuarioService.GetUsuarioConFavoritosAsync(userId);
-        var usuarioConCarrito = await usuarioService.GetUsuarioConCarritoAsync(userId); // <-- Este método lo necesitas
+        var usuario = await usuarioService.GetProductoPorIdUsuarioAsync(userId);
 
         bool esFavorito = usuario?.ListaFavoritos?.Productos?.Any(p => p.IdProducto == producto.IdProducto) ?? false;
-        bool estaEnCarrito = usuarioConCarrito?.CarritoCompra?.Productos?.Any(p => p.IdProducto == producto.IdProducto) ?? false;
+        bool estaEnCarrito = usuario?.CarritoCompra?.Productos?.Any(p => p.IdProducto == producto.IdProducto) ?? false;
 
         var viewModel = new ProductoDetalleViewModel(
             producto,
@@ -40,7 +39,7 @@ public partial class InterfazDetallesProducto : ContentPage
             estaEnCarrito,
             userId,
             favoritoService,
-            new CarritoCompraService()
+            carritoService
         );
 
         BindingContext = viewModel;

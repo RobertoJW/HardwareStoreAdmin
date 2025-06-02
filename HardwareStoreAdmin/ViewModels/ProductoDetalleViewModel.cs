@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using HardwareStoreAdmin.Modelo;
@@ -80,7 +81,7 @@ public class ProductoDetalleViewModel : INotifyPropertyChanged
         ToggleCarritoCommand = new Command(async () =>
         {
             if (EstaEnCarrito)
-                await _carritoService.QuitarDelCarrito(_userId, Model.IdProducto);
+                await carritoService.QuitarDelCarrito(_userId, Model.IdProducto);
             else
                 await _carritoService.AgregarAlCarrito(_userId, Model.IdProducto);
 

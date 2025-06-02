@@ -29,23 +29,6 @@ namespace HardwareStoreAdmin.Servicios
             return new List<Usuario>();
         }
 
-        public async Task<Usuario> GetUsuarioConFavoritosAsync(int userId)
-        {
-            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    Converters = { new ProductoConverter() }
-                };
-                return JsonSerializer.Deserialize<Usuario>(json, options);
-            }
-            return null;
-        }
-
         public async Task<Usuario?> GetUsuarioByIdAsync(int userId)
         {
             var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
@@ -116,13 +99,20 @@ namespace HardwareStoreAdmin.Servicios
                 return null;
             }
         }
-        public async Task<Usuario> GetUsuarioConCarritoAsync(int userId)
+
+        public async Task<Usuario> GetProductoPorIdUsuarioAsync(int userId)
         {
-            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}/carrito");
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<Usuario>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    Converters = { new ProductoConverter() }
+                };
+                return JsonSerializer.Deserialize<Usuario>(json, options);
             }
             return null;
         }

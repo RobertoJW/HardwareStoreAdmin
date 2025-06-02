@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
-using System.Diagnostics;
 
 namespace HardwareStoreAdmin.AppClass;
 
@@ -9,7 +8,7 @@ public partial class CarritoCompra : ContentPage
 {
     private readonly UsuarioService _usuarioService = new();
     private readonly ProductoService _productoService = new();
-    private readonly CarritoCompraService _carritoCompraService = new();
+    public int ProductosEnCarritoNumero;
 
     public ObservableCollection<Producto> ProductosEnCarrito { get; set; } = new();
 
@@ -27,25 +26,17 @@ public partial class CarritoCompra : ContentPage
 
     private async Task CargarCarrito()
     {
-        try
-        {
-            // Obtener usuario con carrito
-            var usuario = await _usuarioService.GetUsuarioConCarritoAsync(App.UsuarioActual.userId);
-            ProductosEnCarrito.Clear();
+        var usuario = await _usuarioService.GetProductoPorIdUsuarioAsync(App.UsuarioActual.userId);
+        ProductosEnCarrito.Clear();
 
-            if (usuario?.CarritoCompra?.Productos != null)
+        if (usuario?.CarritoCompra?.Productos != null)
+        {
+            foreach (var producto in usuario.CarritoCompra.Productos)
             {
-                foreach (var producto in usuario.CarritoCompra.Productos)
-                {
-                    ProductosEnCarrito.Add(producto);
-                }
+                ProductosEnCarrito.Add(producto);
             }
         }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[CargarCarrito] Error: {ex.Message}");
-            await DisplayAlert("Error", "No se pudo cargar el carrito de compras.", "OK");
-        }
+        ProductosEnCarritoNumero = ProductosEnCarrito.Count;
     }
 
     private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)

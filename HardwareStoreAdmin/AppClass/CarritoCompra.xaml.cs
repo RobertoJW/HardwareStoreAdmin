@@ -1,16 +1,38 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
 
 namespace HardwareStoreAdmin.AppClass;
 
-public partial class CarritoCompra : ContentPage
+public partial class CarritoCompra : ContentPage, INotifyPropertyChanged
 {
     private readonly UsuarioService _usuarioService = new();
     private readonly ProductoService _productoService = new();
-    public int ProductosEnCarritoNumero;
 
     public ObservableCollection<Producto> ProductosEnCarrito { get; set; } = new();
+
+    private int _productosEnCarritoNumero;
+    public int ProductosEnCarritoNumero
+    {
+        get => _productosEnCarritoNumero;
+        set
+        {
+            _productosEnCarritoNumero = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private decimal _precioTotal;
+    public decimal PrecioTotal
+    {
+        get => _precioTotal;
+        set
+        {
+            _precioTotal = value;
+            OnPropertyChanged();
+        }
+    }
 
     public CarritoCompra()
     {
@@ -37,6 +59,7 @@ public partial class CarritoCompra : ContentPage
             }
         }
         ProductosEnCarritoNumero = ProductosEnCarrito.Count;
+        PrecioTotal = ProductosEnCarrito.Sum(p => p.Precio);
     }
 
     private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)

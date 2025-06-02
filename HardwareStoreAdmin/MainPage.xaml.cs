@@ -24,6 +24,7 @@ namespace HardwareStoreAdmin
         public MainPage()
         {
             InitializeComponent();
+            myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}!";
             BindingContext = this;
             PickerProducto.ItemsSource = filtros.Keys.ToList();
             LoadProductos();

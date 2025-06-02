@@ -140,7 +140,15 @@
         <!--  Información extra como total  -->
         <Grid Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="10">
-                <Label Text="Total precio: {Binding PrecioTotal, StringFormat='Total: {0:C}'}" TextColor="{x:StaticResource Naranja}" />
+                <Label
+                    FontSize="16"
+                    Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
+                    TextColor="White" />
+
+                <Label
+                    FontSize="16"
+                    Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}"
+                    TextColor="{StaticResource Naranja}" />
             </VerticalStackLayout>
         </Grid>
 

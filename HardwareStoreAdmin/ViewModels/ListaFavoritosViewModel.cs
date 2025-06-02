@@ -17,8 +17,9 @@ namespace HardwareStoreAdmin.ViewModels
     {
         private readonly UsuarioService _usuarioService = new();
         private readonly ListaFavoritoService _favService = new();
-        public ObservableCollection<ProductoFavoritoViewModel> Productos { get; } = 
-            new ObservableCollection<ProductoFavoritoViewModel>();
+        private readonly CarritoCompraService _carritoService = new();
+        public ObservableCollection<ProductoDetalleViewModel> Productos { get; } = 
+            new ObservableCollection<ProductoDetalleViewModel>();
 
         public Command<int> CargarListaFavoritosComando { get; }
 
@@ -42,26 +43,42 @@ namespace HardwareStoreAdmin.ViewModels
 
         public async Task CargarListaFavoritos(int userId)
         {
-            var usuario = await _usuarioService.GetUsuarioByIdAsync(userId);
-            Productos.Clear();
-
-            var favoritos = usuario?.ListaFavoritos?.Productos ?? Enumerable.Empty<Producto>();
-            var productosFavoritos = new HashSet<int>(favoritos.Select(p => p.IdProducto));
-
             if (isCargando) return;
             isCargando = true;
 
-            // cargamos los datos del usuario
-            foreach (var producto in favoritos)
+            try
             {
-                Productos.Add(new ProductoFavoritoViewModel(
-                    producto,
-                    esFavorito: true,
-                    userId,
-                    _favService));
+                Productos.Clear();
+
+                // Obtener productos favoritos
+                var usuario = await _usuarioService.GetUsuarioByIdAsync(userId);
+                var favoritos = usuario?.ListaFavoritos?.Productos ?? Enumerable.Empty<Producto>();
+
+                // Obtener productos en carrito
+                var usuarioConCarrito = await _usuarioService.GetUsuarioConCarritoAsync(userId);
+                var productosCarrito = usuarioConCarrito?.CarritoCompra?.Productos ?? new List<Producto>();
+                var idsCarrito = new HashSet<int>(productosCarrito.Select(p => p.IdProducto));
+
+                foreach (var producto in favoritos)
+                {
+                    bool estaEnCarrito = idsCarrito.Contains(producto.IdProducto);
+
+                    Productos.Add(new ProductoDetalleViewModel(
+                        producto,
+                        esFavorito: true,
+                        estaEnCarrito: estaEnCarrito,
+                        userId,
+                        _favService,
+                        _carritoService));
+                }
+
+                Debug.WriteLine($"Productos cargados: {Productos.Count}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[CargarListaFavoritos] Error: {ex.Message}");
             }
 
-            Debug.WriteLine($"Productos cargados: {Productos.Count}");
             isCargando = false;
         }
 

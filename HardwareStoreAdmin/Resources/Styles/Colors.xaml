@@ -21,6 +21,7 @@
     <Color x:Key="GrisOscuro">#2B2E32</Color>
     <Color x:Key="GrisClaro">#8B8E8E</Color>
     <Color x:Key="BGGris">#1F2225</Color>
+    <Color x:Key="NaranjaClaro">#FFE0B2</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>

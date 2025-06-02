@@ -30,7 +30,6 @@ namespace HardwareStoreAdmin.Servicios
                     PropertyNameCaseInsensitive = true
                 };
                 options.Converters.Add(new ProductoConverter());
-
                 return JsonSerializer.Deserialize<List<Producto>>(json, options);
             }
             return new List<Producto>();
@@ -45,6 +44,34 @@ namespace HardwareStoreAdmin.Servicios
             var producto = todosLosProductos.FirstOrDefault(p => p.IdProducto == idProducto);
             if (producto == null)
                 throw new KeyNotFoundException($"Producto con ID {idProducto} no encontrado.");
+
+            return producto;
+        }
+
+        public async Task<List<Producto>> GetProductoFiltrado(string categoria)
+        {
+            // cargamos todos los productos
+            var todosLosProductos = await GetProductosAsync();
+
+            // buscamos el producto por su id
+            var producto = todosLosProductos.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            if (producto.Count == null)
+                throw new KeyNotFoundException($"Productos con categoria {categoria} no encontrados.");
+
+            return producto;
+        }
+
+        public async Task<List<Producto>> GetProductoFiltradoDeUsuario(string categoria, int userId)
+        {
+            // cargamos todos los productos
+            var todosLosProductos = await GetProductosAsync();
+
+            // buscamos el producto por su id
+            var producto = todosLosProductos.Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            if (producto.Count == null)
+                throw new KeyNotFoundException($"Productos con categoria {categoria} no encontrados.");
 
             return producto;
         }

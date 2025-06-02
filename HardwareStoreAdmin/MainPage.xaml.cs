@@ -11,6 +11,8 @@ namespace HardwareStoreAdmin
 
         private readonly ProductoService _productoService = new ProductoService();
 
+        List<Button> botonesFiltro;
+
         public MainPage()
         {
             InitializeComponent();
@@ -37,6 +39,36 @@ namespace HardwareStoreAdmin
 
                 // navegamos a la página con el producto que hemos clicado. 
                 await Navigation.PushAsync(new InterfazDetallesProducto(productoSeleccionado));
+            }
+        }
+
+        private async void BtnFiltro(object sender, EventArgs e)
+        {
+            var boton = sender as Button;
+            string categoria = boton?.Text;
+            List<Producto> productosFiltrados;
+
+            FiltroTodos.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+            FiltroPortatil.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+            FiltroSobremesa.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+            FiltroMovil.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+
+            var button = sender as Button;
+            button.BackgroundColor = (Color)Application.Current.Resources["Naranja"];
+
+            if (categoria == "Todos")
+            {
+                productosFiltrados = await _productoService.GetProductosAsync();
+            }
+            else
+            {
+                productosFiltrados = await _productoService.GetProductoFiltrado(categoria);
+            }
+
+            Productos.Clear();
+            foreach (var producto in productosFiltrados)
+            {
+                Productos.Add(producto);
             }
         }
     }

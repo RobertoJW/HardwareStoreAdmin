@@ -151,27 +151,27 @@
                     Text="Filtrar por:" />
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button
-                        x:Name="BtnFilterAll"
                         Margin="20,0,0,0"
-                        Clicked="BtnFilterAll_Clicked"
+                        x:Name="FiltroTodos"
+                        Clicked="BtnFiltro"
                         Style="{StaticResource BtnModFavouritePage}"
                         Text="Todo" />
                     <Button
-                        x:Name="FilterDesktop"
-                        Clicked="BtnFilterDesktop"
+                        x:Name="FiltroSobremesa"
+                        Clicked="BtnFiltro"
                         Style="{StaticResource BtnModFavouritePage}"
-                        Text="Sobremesas" />
+                        Text="Sobremesa" />
                     <Button
-                        x:Name="FilterLaptop"
-                        Clicked="BtnFilterLaptop"
+                        x:Name="FiltroPortatil"
+                        Clicked="BtnFiltro"
                         Style="{StaticResource BtnModFavouritePage}"
-                        Text="Portátiles" />
+                        Text="Portatil" />
                     <Button
-                        x:Name="FilterPhone"
+                        x:Name="FiltroMovil"
                         Margin="0,0,20,0"
-                        Clicked="BtnFilterPhone"
+                        Clicked="BtnFiltro"
                         Style="{StaticResource BtnModFavouritePage}"
-                        Text="Móviles" />
+                        Text="Movil" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Grid>

@@ -220,21 +220,29 @@
                         BackgroundColor="{x:StaticResource Naranja}"
                         CornerRadius="20"
                         Text="Todos"
-                        TextColor="White" />
-                    <Button
-                        BackgroundColor="#FFE0B2"
-                        CornerRadius="20"
-                        Text="Portátil"
+                        x:Name="FiltroTodos"
+                        Clicked="BtnFiltro"
                         TextColor="Black" />
                     <Button
-                        BackgroundColor="#FFE0B2"
+                        BackgroundColor="{StaticResource NaranjaClaro}"
+                        CornerRadius="20"
+                        Text="Portatil"
+                        x:Name="FiltroPortatil"
+                        Clicked="BtnFiltro"
+                        TextColor="Black" />
+                    <Button
+                        BackgroundColor="{StaticResource NaranjaClaro}"
                         CornerRadius="20"
                         Text="Sobremesa"
+                        x:Name="FiltroSobremesa"
+                        Clicked="BtnFiltro"
                         TextColor="Black" />
                     <Button
-                        BackgroundColor="#FFE0B2"
+                        BackgroundColor="{StaticResource NaranjaClaro}"
                         CornerRadius="20"
-                        Text="Móvil"
+                        Text="Movil"
+                        x:Name="FiltroMovil"
+                        Clicked="BtnFiltro"
                         TextColor="Black" />
                 </HorizontalStackLayout>
 

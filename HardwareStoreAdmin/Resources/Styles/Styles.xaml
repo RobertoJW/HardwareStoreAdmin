@@ -617,7 +617,7 @@
     </Style>
 
     <Style x:Key="BtnModFavouritePage" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource GrisClaro}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource NaranjaClaro}" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="HeightRequest" Value="50" />

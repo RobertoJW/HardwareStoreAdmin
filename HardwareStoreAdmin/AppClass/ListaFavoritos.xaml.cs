@@ -50,23 +50,33 @@ public partial class ListaFavoritos : ContentPage
         }
     }
 
-    private void BtnFilterDesktop(object sender, EventArgs e)
+    private async void BtnFiltro(object sender, EventArgs e)
     {
-        
-    }
+        var boton = sender as Button;
+        string categoria = boton?.Text;
+        List<Producto> productosFiltrados;
 
-    private void BtnFilterLaptop(object sender, EventArgs e)
-    {
+        FiltroTodos.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+        FiltroPortatil.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+        FiltroSobremesa.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
+        FiltroMovil.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
 
-    }
+        var button = sender as Button;
+        button.BackgroundColor = (Color)Application.Current.Resources["Naranja"];
 
-    private void BtnFilterPhone(object sender, EventArgs e)
-    {
+        if (categoria == "Todos")
+        {
+            productosFiltrados = await _productoService.GetProductosAsync();
+        }
+        else
+        {
+            productosFiltrados = await _productoService.GetProductoFiltrado(categoria);
+        }
 
-    }
-
-    private void BtnFilterAll_Clicked(object sender, EventArgs e)
-    {
-
+        Productos.Clear();
+        foreach (var producto in productosFiltrados)
+        {
+            Productos.Add(producto);
+        }
     }
 }

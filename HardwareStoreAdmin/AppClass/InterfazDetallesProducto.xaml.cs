@@ -40,7 +40,7 @@ public partial class InterfazDetallesProducto : ContentPage
             estaEnCarrito,
             userId,
             favoritoService,
-            new CarritoCompraService()
+            carritoService
         );
 
         BindingContext = viewModel;

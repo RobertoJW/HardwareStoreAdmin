@@ -52,7 +52,8 @@ public partial class InterfazDetallesProducto : ContentPage
 
     private async void Imagen_Tapped(object sender, EventArgs e)
     {
-        var imagenUrl = (BindingContext as Producto)?.ImagenUrl;
+        var viewModel = BindingContext as ProductoDetalleViewModel;
+        var imagenUrl = viewModel?.ImagenUrl;
 
         if (!string.IsNullOrEmpty(imagenUrl))
         {

@@ -3,9 +3,7 @@
     x:Class="HardwareStoreAdmin.AppClass.InterfazDetallesProducto"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="InterfazDetallesProducto"
     BackgroundColor="{StaticResource BGGris}">
-
 
     <Grid Margin="15" RowDefinitions=".4*,.1*,.1*,.4*">
         <!--  Imagen del producto + iconos  -->

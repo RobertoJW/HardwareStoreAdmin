@@ -3,9 +3,131 @@
     x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="CarritoCompra">
-    <Grid RowDefinitions=".1*,.2*,*">
+    xmlns:selector="clr-namespace:HardwareStoreAdmin.Vistas"
+    BackgroundColor="{StaticResource BGGris}">
+    <ContentPage.Resources>
+        <!--  PLANTILLA MÓVIL  -->
+        <DataTemplate x:Key="MovilTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Móvil"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
 
+        <!--  PLANTILLA PORTÁTIL  -->
+        <DataTemplate x:Key="PortatilTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Portátil"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  PLANTILLA SOBREMESA  -->
+        <DataTemplate x:Key="SobremesaTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Sobremesa"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  SELECTOR DE PLANTILLAS  -->
+        <selector:ProductoTemplateSelector
+            x:Key="ProductoTemplateSelector"
+            MovilTemplate="{StaticResource MovilTemplate}"
+            PortatilTemplate="{StaticResource PortatilTemplate}"
+            SobremesaTemplate="{StaticResource SobremesaTemplate}" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions=".1*,.2*,*">
         <!--  Título  -->
         <Grid
             Grid.Row="0"
@@ -18,7 +140,6 @@
         <!--  Información extra como total  -->
         <Grid Grid.Row="1">
             <VerticalStackLayout Padding="20" Spacing="10">
-                <Label Text="Total productos: {Binding Productos.Count}" TextColor="White" />
                 <Label Text="Total precio: {Binding PrecioTotal, StringFormat='Total: {0:C}'}" TextColor="{x:StaticResource Naranja}" />
             </VerticalStackLayout>
         </Grid>
@@ -29,7 +150,7 @@
                 <CollectionView
                     Margin="10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
-                    ItemsSource="{Binding Productos}"
+                    ItemsSource="{Binding ProductosEnCarrito}"
                     SelectionChanged="OnProductoSeleccionado"
                     SelectionMode="Single">
                     <CollectionView.ItemsLayout>

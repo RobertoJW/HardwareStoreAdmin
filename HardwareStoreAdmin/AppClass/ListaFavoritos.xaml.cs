@@ -9,7 +9,6 @@ public partial class ListaFavoritos : ContentPage
 {
     private readonly UsuarioService _usuarioService = new();
     public ObservableCollection<Producto> Productos { get; set; } = new();
-
     private readonly ProductoService _productoService = new ProductoService();
 
     public ListaFavoritos()
@@ -25,7 +24,7 @@ public partial class ListaFavoritos : ContentPage
 
     private async Task CargarFavoritos()
     {
-        var usuario = await _usuarioService.GetUsuarioConFavoritosAsync(App.UsuarioActual.userId);
+        var usuario = await _usuarioService.GetProductoPorIdUsuarioAsync(App.UsuarioActual.userId);
         Productos.Clear();
 
         if (usuario?.ListaFavoritos?.Productos != null)

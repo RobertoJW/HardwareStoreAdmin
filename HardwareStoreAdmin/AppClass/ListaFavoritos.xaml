@@ -155,7 +155,7 @@
                         x:Name="FiltroTodos"
                         Clicked="BtnFiltro"
                         Style="{StaticResource BtnModFavouritePage}"
-                        Text="Todo" />
+                        Text="Todos" />
                     <Button
                         x:Name="FiltroSobremesa"
                         Clicked="BtnFiltro"

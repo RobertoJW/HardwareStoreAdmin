@@ -1,25 +1,58 @@
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
-using HardwareStoreAdmin.ViewModels;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace HardwareStoreAdmin.AppClass;
 
 public partial class ListaFavoritos : ContentPage
 {
-    private bool esClicado = false;
-    private ListaFavoritosViewModel _listaFavoritoViewModel;
+    private readonly UsuarioService _usuarioService = new();
+    public ObservableCollection<Producto> Productos { get; set; } = new();
+
+    private readonly ProductoService _productoService = new ProductoService();
+
     public ListaFavoritos()
     {
         InitializeComponent();
-        _listaFavoritoViewModel = new ListaFavoritosViewModel();
-        BindingContext = _listaFavoritoViewModel;
-        CargarDatosAsync();
+        BindingContext = this;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CargarFavoritos();
+    }
+
+    private async Task CargarFavoritos()
+    {
+        var usuario = await _usuarioService.GetUsuarioConFavoritosAsync(App.UsuarioActual.userId);
+        Productos.Clear();
+
+        if (usuario?.ListaFavoritos?.Productos != null)
+        {
+            foreach (var producto in usuario.ListaFavoritos.Productos)
+            {
+                Productos.Add(producto);
+            }
+        }
+    }
+
+    private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Producto productoSeleccionado)
+        {
+            // Quitamos la seleccion para evitar que quede seleccionado visualmente. 
+            ((CollectionView)sender).SelectedItem = null;
+
+            var productoCompleto = await _productoService.GetProductoPorIdAsync(productoSeleccionado.IdProducto);
+            // navegamos a la página con el producto que hemos clicado. 
+            await Navigation.PushAsync(new InterfazDetallesProducto(productoCompleto));
+        }
     }
 
     private void BtnFilterDesktop(object sender, EventArgs e)
     {
-
+        
     }
 
     private void BtnFilterLaptop(object sender, EventArgs e)
@@ -32,17 +65,8 @@ public partial class ListaFavoritos : ContentPage
 
     }
 
-    private async void CargarDatosAsync()
+    private void BtnFilterAll_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            await _listaFavoritoViewModel.CargarListaFavoritos();
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"Error cargando productos: {ex.Message}");
-            // Aquí puedes mostrar un alert si quieres
-            await DisplayAlert("Error", $"No se pudieron cargar los productos: {ex.Message}", "OK");
-        }
+
     }
 }

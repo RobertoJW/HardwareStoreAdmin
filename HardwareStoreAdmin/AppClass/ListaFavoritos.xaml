@@ -1,51 +1,196 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HardwareStoreAdmin.AppClass.ListaFavoritos"
-             BackgroundColor="{StaticResource GrisOscuro}"
-             Title="ListaFavoritos">
+<ContentPage
+    x:Class="HardwareStoreAdmin.AppClass.ListaFavoritos"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:selector="clr-namespace:HardwareStoreAdmin.Vistas"
+    BackgroundColor="{StaticResource GrisOscuro}">
+
+    <!--  PLANTILLAS Y SELECTOR  -->
+    <ContentPage.Resources>
+        <!--  PLANTILLA MÓVIL  -->
+        <DataTemplate x:Key="MovilTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Móvil"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  PLANTILLA PORTÁTIL  -->
+        <DataTemplate x:Key="PortatilTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Portátil"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  PLANTILLA SOBREMESA  -->
+        <DataTemplate x:Key="SobremesaTemplate">
+            <Border
+                Margin="0,5"
+                Padding="15"
+                BackgroundColor="#2A2A2A"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Grid
+                        BackgroundColor="Black"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="100"
+                            Source="{Binding ImagenUrl}"
+                            WidthRequest="100" />
+                    </Grid>
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label
+                            FontSize="16"
+                            Text="{Binding NombreProducto}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            Text="Sobremesa"
+                            TextColor="Gray" />
+                        <Label
+                            FontSize="14"
+                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            TextColor="#FF7F00" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  SELECTOR DE PLANTILLAS  -->
+        <selector:ProductoTemplateSelector
+            x:Key="ProductoTemplateSelector"
+            MovilTemplate="{StaticResource MovilTemplate}"
+            PortatilTemplate="{StaticResource PortatilTemplate}"
+            SobremesaTemplate="{StaticResource SobremesaTemplate}" />
+    </ContentPage.Resources>
+
+    <!--  ESTRUCTURA DE PÁGINA  -->
     <Grid RowDefinitions=".1*,.2*,*">
-        <Grid Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,15,0,0">
-            <Label Style="{StaticResource TituloListaFavoritosPage}"/>
+
+        <!--  Título  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0,15,0,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Lista de Favoritos" />
         </Grid>
 
-        <!--Filtros-->
-        <Grid Grid.Row="1" >
+        <!--  Filtros  -->
+        <Grid Grid.Row="1">
             <VerticalStackLayout>
-                <Label Text="Filtrar por:" Style="{StaticResource TituloListaFavoritosPage}" Margin="20,0,0,20"/>
+                <Label
+                    Margin="20,0,0,20"
+                    Style="{StaticResource TituloListaFavoritosPage}"
+                    Text="Filtrar por:" />
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
-                    <Button Text="Todo" x:Name="BtnFilterAll" Style="{StaticResource BtnModFavouritePage}" Margin="20,0,0,0"/>
-                    <Button Text="Sobremesas" x:Name="FilterDesktop" Clicked="BtnFilterDesktop" Style="{StaticResource BtnModFavouritePage}"/>
-                    <Button Text="Portátiles" x:Name="FilterLaptop" Clicked="BtnFilterLaptop" Style="{StaticResource BtnModFavouritePage}"/>
-                    <Button Text="Móviles" x:Name="FilterPhone" Clicked="BtnFilterLaptop" Style="{StaticResource BtnModFavouritePage}" Margin="0,0,20,0"/>
+                    <Button
+                        x:Name="BtnFilterAll"
+                        Margin="20,0,0,0"
+                        Clicked="BtnFilterAll_Clicked"
+                        Style="{StaticResource BtnModFavouritePage}"
+                        Text="Todo" />
+                    <Button
+                        x:Name="FilterDesktop"
+                        Clicked="BtnFilterDesktop"
+                        Style="{StaticResource BtnModFavouritePage}"
+                        Text="Sobremesas" />
+                    <Button
+                        x:Name="FilterLaptop"
+                        Clicked="BtnFilterLaptop"
+                        Style="{StaticResource BtnModFavouritePage}"
+                        Text="Portátiles" />
+                    <Button
+                        x:Name="FilterPhone"
+                        Margin="0,0,20,0"
+                        Clicked="BtnFilterPhone"
+                        Style="{StaticResource BtnModFavouritePage}"
+                        Text="Móviles" />
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Grid>
 
+        <!--  Lista de productos favoritos  -->
         <Grid Grid.Row="2">
             <Border Style="{StaticResource BorderModListaFavorito}">
-                <CollectionView ItemsSource="{Binding Productos}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="10">
-                                <Border Style="{StaticResource BorderParaProductos}">
-                                    <Grid>
-                                        <Image Source="{Binding ImagenUrl}" Aspect="Fill"/>
-                                        <Label Text="{Binding NombreProducto}" Style="{StaticResource LabelBorder}"/>
-                                        <Label Text="{Binding Precio, StringFormat='{}{0:€}'}" Style="{StaticResource LabelBorder}" TextColor="{StaticResource Naranja}"/>
-                                    </Grid>
-                                </Border>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.SeleccionadorProductoComando, Source={x:Reference ListaFavoritos}}" 
-                                                      CommandParameter="{Binding .}"/>
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                    <!--Si no encuentra nada, mostrará este mensaje-->
-                    <CollectionView.EmptyView>
-                        <Label Style="{StaticResource MensajeProductoVacio}"/>
-                    </CollectionView.EmptyView>
+                <CollectionView
+                    Margin="10"
+                    ItemTemplate="{StaticResource ProductoTemplateSelector}"
+                    ItemsSource="{Binding Productos}"
+                    SelectionChanged="OnProductoSeleccionado"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Vertical"
+                            Span="1"
+                            VerticalItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
                 </CollectionView>
             </Border>
         </Grid>

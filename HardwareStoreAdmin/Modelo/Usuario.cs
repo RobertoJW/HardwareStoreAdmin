@@ -13,8 +13,8 @@ namespace HardwareStoreAdmin.Modelo
         // añadimos '?' para permitir valores nulos para fotos de perfil. 
         public string? UrlprofilePhoto { get; set; }
 
-        public CarritoCompra CarritoCompra { get; set; }
-        public ListaFavoritos ListaFavoritos { get; set; }
+        public CarritoCompra? CarritoCompra { get; set; }
+        public ListaFavoritos? ListaFavoritos { get; set; }
 
         public Usuario(string email, string userName, string password, string? UrlprofilePhoto)
         {

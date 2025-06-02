@@ -1,11 +1,7 @@
-﻿using HardwareStoreAdmin.Modelo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+using HardwareStoreAdmin.Modelo;
 
 namespace HardwareStoreAdmin.Converter
 {
@@ -13,17 +9,32 @@ namespace HardwareStoreAdmin.Converter
     {
         public override Producto Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            using var jsonDoc = JsonDocument.ParseValue(ref reader);
-            var root = jsonDoc.RootElement;
-            var categoria = root.GetProperty("categoria").GetString()?.ToLower();
-
-            return categoria switch
+            using (var jsonDoc = JsonDocument.ParseValue(ref reader))
             {
-                "movil" => JsonSerializer.Deserialize<Movil>(root.GetRawText(), options),
-                "portatil" => JsonSerializer.Deserialize<Portatil>(root.GetRawText(), options),
-                "sobremesa" => JsonSerializer.Deserialize<Sobremesa>(root.GetRawText(), options),
-                _ => throw new JsonException($"Tipo desconocido: {categoria}")
-            };
+                var jsonObject = jsonDoc.RootElement;
+
+                string categoria = jsonObject.GetProperty("categoria").GetString();
+
+                Producto producto;
+
+                switch (categoria)
+                {
+                    case "Movil":
+                        producto = JsonSerializer.Deserialize<Movil>(jsonObject.GetRawText(), options);
+                        break;
+                    case "Portatil":
+                        producto = JsonSerializer.Deserialize<Portatil>(jsonObject.GetRawText(), options);
+                        break;
+                    case "Sobremesa":
+                        producto = JsonSerializer.Deserialize<Sobremesa>(jsonObject.GetRawText(), options);
+                        break;
+                    default:
+                        producto = JsonSerializer.Deserialize<Producto>(jsonObject.GetRawText(), options);
+                        break;
+                }
+
+                return producto;
+            }
         }
 
         public override void Write(Utf8JsonWriter writer, Producto value, JsonSerializerOptions options)

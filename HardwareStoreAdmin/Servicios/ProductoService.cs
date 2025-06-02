@@ -35,5 +35,18 @@ namespace HardwareStoreAdmin.Servicios
             }
             return new List<Producto>();
         }
+
+        public async Task<Producto> GetProductoPorIdAsync(int idProducto)
+        {
+            // cargamos todos los productos
+            var todosLosProductos = await GetProductosAsync();
+
+            // buscamos el producto por su id
+            var producto = todosLosProductos.FirstOrDefault(p => p.IdProducto == idProducto);
+            if (producto == null)
+                throw new KeyNotFoundException($"Producto con ID {idProducto} no encontrado.");
+
+            return producto;
+        }
     }
 }

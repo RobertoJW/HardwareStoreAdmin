@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
 using HardwareStoreAdmin.Modelo;
+using HardwareStoreAdmin.Converter;
+
 
 namespace HardwareStoreAdmin.Servicios
 {
@@ -25,6 +27,32 @@ namespace HardwareStoreAdmin.Servicios
                 return JsonSerializer.Deserialize<List<Usuario>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             }
             return new List<Usuario>();
+        }
+
+        public async Task<Usuario> GetUsuarioConFavoritosAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    Converters = { new ProductoConverter() }
+                };
+                return JsonSerializer.Deserialize<Usuario>(json, options);
+            }
+            return null;
+        }
+
+        public async Task<Usuario?> GetUsuarioByIdAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}");
+            if (!response.IsSuccessStatusCode) return null;
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Usuario>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<Usuario?> VerificarCredencialesAsync(string email, string password)
@@ -57,22 +85,36 @@ namespace HardwareStoreAdmin.Servicios
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"[ERROR HTTP] Código: {response.StatusCode}");
-                    Debug.WriteLine($"[ERROR BODY] Respuesta: {contenido}");
+                    Debug.WriteLine($"[HTTP ERROR] StatusCode: {response.StatusCode}");
+                    Debug.WriteLine($"[BODY] {contenido}");
                     return null;
                 }
 
-                return JsonSerializer.Deserialize<Usuario>(contenido, new JsonSerializerOptions
+                try
                 {
-                    PropertyNameCaseInsensitive = true
-                });
+                    var usuarioCreado = JsonSerializer.Deserialize<Usuario>(contenido, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (usuarioCreado == null)
+                    {
+                        Debug.WriteLine("[DESERIALIZACIÓN] El objeto deserializado es null");
+                    }
+
+                    return usuarioCreado;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[EXCEPCIÓN DESERIALIZACIÓN] {ex.Message}");
+                    return null;
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[EXCEPCIÓN] Error en RegistrarUsuarioAsync: {ex.Message}");
+                Debug.WriteLine($"[EXCEPCIÓN HTTP] {ex.Message}");
                 return null;
             }
         }
-
     }
 }

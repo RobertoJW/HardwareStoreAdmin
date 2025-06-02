@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
 
@@ -40,7 +35,7 @@ namespace HardwareStoreAdmin.ViewModels
             if (isCargando) return;
             isCargando = true;
 
-            var lista = await _carritoCompraService.GetCarritoCompraAsync();
+            var lista = await _carritoCompraService.GetCarritoCompraAsync(App.UsuarioActual.userId);
             CarritoCompra.Clear();
 
             foreach (var cc in lista)

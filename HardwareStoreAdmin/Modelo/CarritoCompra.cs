@@ -16,10 +16,9 @@ namespace HardwareStoreAdmin.Modelo
 
         public int id_producto { get; set; }
         [ForeignKey("id_producto")]
-        public virtual Producto Producto { get; set; }
-
+        public virtual List<Producto> Productos { get; set; } = new List<Producto>();
         public int userId { get; set; }
         [ForeignKey("userId")]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario? Usuario { get; set; }
     }
 }

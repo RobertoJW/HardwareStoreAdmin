@@ -116,5 +116,15 @@ namespace HardwareStoreAdmin.Servicios
                 return null;
             }
         }
+        public async Task<Usuario> GetUsuarioConCarritoAsync(int userId)
+        {
+            var response = await _httpClient.GetAsync($"{baseUrl}/{userId}/carrito");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Usuario>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            }
+            return null;
+        }
     }
 }

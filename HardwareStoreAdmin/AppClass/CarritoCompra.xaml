@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
-             BackgroundColor="White"
-             Title="CarritoCompra">
+<ContentPage
+    x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="CarritoCompra">
+    <Grid RowDefinitions=".1*,.2*,*">
 
-    <Grid>
-        <!-- Título en fila 0 -->
-        <Label Text="Carrito de Compra" Grid.Row="0" Style="{StaticResource TituloCarritoCompra}"/>
+        <!--  Título  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0,15,0,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Carrito de Compra" />
+        </Grid>
 
-        <!-- Border que envuelve el CollectionView en fila 1 -->
-        <Border Style="{StaticResource BorderModListaFavorito}">
-            <CollectionView ItemsSource="{Binding Productos}" x:Name="ListaFavoritos">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Border Style="{StaticResource BorderParaProductos}">
-                                <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
-                                    <Image Source="{Binding ImagenUrl}" Aspect="Fill" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
-                                    <Label Text="{Binding NombreProducto}" Style="{StaticResource LabelBorder}" Grid.Column="1" Grid.Row="0"/>
-                                    <Label Text="{Binding Precio, StringFormat='{}{0:€}'}" Style="{StaticResource LabelBorder}" TextColor="{StaticResource Naranja}"
-                                           Grid.Column="1" Grid.Row="1"/>
-                                    <Button Style="{StaticResource BotonEliminarProductoCarritoCompra}" Grid.Row="2" Grid.Column="1"/>
-                                </Grid>
-                            </Border>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.SeleccionadorProductoComando, Source={x:Reference ListaFavoritos}}" 
-                                                      CommandParameter="{Binding .}"/>
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
-                    <Label Style="{StaticResource MensajeProductoVacio}" Text="Tu carrito está vacío."/>
-                </CollectionView.EmptyView>
-            </CollectionView>
-        </Border>
+        <!--  Información extra como total  -->
+        <Grid Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="10">
+                <Label Text="Total productos: {Binding Productos.Count}" TextColor="White" />
+                <Label Text="Total precio: {Binding PrecioTotal, StringFormat='Total: {0:C}'}" TextColor="{x:StaticResource Naranja}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  Lista de productos en carrito  -->
+        <Grid Grid.Row="2">
+            <Border Style="{StaticResource BorderModListaFavorito}">
+                <CollectionView
+                    Margin="10"
+                    ItemTemplate="{StaticResource ProductoTemplateSelector}"
+                    ItemsSource="{Binding Productos}"
+                    SelectionChanged="OnProductoSeleccionado"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Vertical"
+                            Span="1"
+                            VerticalItemSpacing="5" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </Border>
+        </Grid>
     </Grid>
+
 </ContentPage>

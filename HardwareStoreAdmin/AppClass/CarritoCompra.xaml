@@ -1,10 +1,11 @@
-text<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:selector="clr-namespace:HardwareStoreAdmin.Vistas"
     BackgroundColor="{StaticResource BGGris}">
+    
     <ContentPage.Resources>
         <!--  PLANTILLA MÓVIL  -->
         <DataTemplate x:Key="MovilTemplate">
@@ -127,8 +128,8 @@ text<?xml version="1.0" encoding="utf-8" ?>
             PortatilTemplate="{StaticResource PortatilTemplate}"
             SobremesaTemplate="{StaticResource SobremesaTemplate}" />
     </ContentPage.Resources>
-    <Grid RowDefinitions=".1*,.2*,*">
-        <!--  Título  -->
+    <Grid RowDefinitions=".1*,.8*,.1*">
+        <!--  Título (Fila 0) -->
         <Grid
             Grid.Row="0"
             Margin="0,15,0,0"
@@ -137,43 +138,33 @@ text<?xml version="1.0" encoding="utf-8" ?>
             <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Carrito de Compra" />
         </Grid>
 
-        <!--  Lista de productos en carrito  -->
-        <Grid Grid.Row="2">
-            <Border Style="{StaticResource BorderModListaFavorito}">
-                <Grid ColumnDefinitions=".6*,.4*">
-                    <CollectionView
+        <!--  Lista de productos en carrito (Fila 1) -->
+        <Grid Grid.Row="1">
+            <Border Style="{StaticResource BorderModCarritoCompra}">
+                <CollectionView
                     Margin="10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
                     ItemsSource="{Binding ProductosEnCarrito}"
                     SelectionChanged="OnProductoSeleccionado"
                     SelectionMode="Single"
                     Grid.Column="0">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
                             Orientation="Vertical"
                             Span="1"
                             VerticalItemSpacing="5" />
-                        </CollectionView.ItemsLayout>
-                    </CollectionView>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
 
-                    <Border Style="{StaticResource BorderModListaFavorito1}">
-                        <VerticalStackLayout Padding="20" Spacing="10">
-                            <Label
-                                FontSize="16"
-                                Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
-                                TextColor="White" />
-
-                            <Label
-                                FontSize="16"
-                                Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}"
-                                TextColor="{StaticResource Naranja}" />
-
-                            <CheckBox />
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
             </Border>
         </Grid>
+            <HorizontalStackLayout Grid.Row="2" Style="{StaticResource InformacionPagoMod}">
+                <!--<Label
+                    FontSize="16"
+                    Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
+                    TextColor="White" />-->
+            <Label Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}" Style="{StaticResource PrecioProductoMod}"/>
+            <Button Style="{StaticResource btnModPagar}"/>
+        </HorizontalStackLayout>
     </Grid>
-
 </ContentPage>

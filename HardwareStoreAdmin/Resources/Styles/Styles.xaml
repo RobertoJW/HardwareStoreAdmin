@@ -695,4 +695,30 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="btnModPagar" TargetType="Button">
+        <Setter Property="Text" Value="Pagar ->" />
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Naranja}" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+    </Style>
+
+    <Style x:Key="LabelPrecioCarritoCompra" TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="TextColor" Value="{StaticResource Naranja}"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="InformacionPagoMod" TargetType="HorizontalStackLayout">
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Spacing" Value="50"/>
+        <Setter Property="VerticalOptions" Value="Fill"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BGGris}"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+    </Style>
+    
 </ResourceDictionary>

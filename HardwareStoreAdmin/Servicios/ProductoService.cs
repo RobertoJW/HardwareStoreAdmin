@@ -63,11 +63,16 @@ namespace HardwareStoreAdmin.Servicios
             return producto;
         }
 
-        public async Task<List<Producto>> GetProductoFiltradoSearchBar(string textoBusqueda, string datoSeleccionado)
+        public async Task<List<Producto>> GetProductoFiltradoSearchBar(string textoBusqueda, string datoSeleccionado, string categoria)
         {
             // cargamos todos los productos
             var todosLosProductos = await GetProductosAsync();
 
+            if (categoria != "Todo")
+            {
+                todosLosProductos = todosLosProductos
+                    .Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
             if (datoSeleccionado == "Todo")
             {
                 return todosLosProductos.Where(p => p.NombreEmpresa.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase) 

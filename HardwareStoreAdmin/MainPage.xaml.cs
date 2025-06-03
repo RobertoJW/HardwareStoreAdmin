@@ -21,6 +21,8 @@ namespace HardwareStoreAdmin
             { "Marca", "NombreEmpresa" }
         };
 
+        private string categoriaSeleccionada = "Todos";
+
         public MainPage()
         {
             InitializeComponent();
@@ -56,6 +58,7 @@ namespace HardwareStoreAdmin
         {
             var boton = sender as Button;
             string categoria = boton?.Text;
+            categoriaSeleccionada = categoria;
             List<Producto> productosFiltrados;
 
             FiltroTodos.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
@@ -79,6 +82,7 @@ namespace HardwareStoreAdmin
             foreach (var producto in productosFiltrados)
             {
                 Productos.Add(producto);
+                busquedaProductoTxt.Text = "";
             }
         }
 
@@ -89,7 +93,7 @@ namespace HardwareStoreAdmin
             var filtroSeleccionado = PickerProducto.SelectedItem as string;
 
             string datoSeleccionado = filtros.ContainsKey(filtroSeleccionado) ? filtros[filtroSeleccionado] : "Todo";
-            var resultado = await _productoService.GetProductoFiltradoSearchBar(textoBusqueda, datoSeleccionado);
+            var resultado = await _productoService.GetProductoFiltradoSearchBar(textoBusqueda, datoSeleccionado, categoriaSeleccionada);
 
             Productos.Clear();
             foreach (var producto in resultado)

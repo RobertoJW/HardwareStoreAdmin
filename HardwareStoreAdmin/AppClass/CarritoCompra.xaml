@@ -153,14 +153,15 @@
         </Grid>
 
         <!--  Lista de productos en carrito  -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" ColumnDefinitions=".7*,.3*">
             <Border Style="{StaticResource BorderModListaFavorito}">
                 <CollectionView
                     Margin="10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
                     ItemsSource="{Binding ProductosEnCarrito}"
                     SelectionChanged="OnProductoSeleccionado"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    Grid.Column="0">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             Orientation="Vertical"
@@ -168,6 +169,8 @@
                             VerticalItemSpacing="5" />
                     </CollectionView.ItemsLayout>
                 </CollectionView>
+                
+                
             </Border>
         </Grid>
     </Grid>

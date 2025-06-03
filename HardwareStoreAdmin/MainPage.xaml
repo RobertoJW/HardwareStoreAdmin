@@ -258,7 +258,7 @@
                         BackgroundColor="{StaticResource NaranjaClaro}"
                         Clicked="BtnFiltro"
                         CornerRadius="20"
-                        Text="Portátil"
+                        Text="Portatil"
                         TextColor="Black" />
                     <Button
                         x:Name="FiltroSobremesa"
@@ -272,7 +272,7 @@
                         BackgroundColor="{StaticResource NaranjaClaro}"
                         Clicked="BtnFiltro"
                         CornerRadius="20"
-                        Text="Móvil"
+                        Text="Movil"
                         TextColor="Black" />
                 </HorizontalStackLayout>
 

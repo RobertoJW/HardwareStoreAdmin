@@ -625,13 +625,25 @@
     </Style>
 
     <Style x:Key="BorderModListaFavorito" TargetType="Border">
-        <Setter Property="Grid.Row" Value="3" />
+        <Setter Property="Grid.Row" Value="0" />
         <Setter Property="Grid.RowSpan" Value="2" />
         <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="Stroke" Value="Transparent" />
         <Setter Property="StrokeShape">
             <Setter.Value>
                 <RoundRectangle CornerRadius="30,30,0,0" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BorderModListaFavorito1" TargetType="Border">
+        <Setter Property="Grid.Row" Value="3" />
+        <Setter Property="Grid.Column" Value="1" />
+        <Setter Property="BackgroundColor" Value="{StaticResource GrisOscuro}" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="30,0,0,0" />
             </Setter.Value>
         </Setter>
     </Style>

@@ -21,7 +21,7 @@ namespace HardwareStoreAdmin
             { "Marca", "NombreEmpresa" }
         };
 
-        private string categoriaSeleccionada = "Todos";
+        private string categoriaSeleccionada = "Todo";
 
         public MainPage()
         {
@@ -29,6 +29,7 @@ namespace HardwareStoreAdmin
             myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}!";
             BindingContext = this;
             PickerProducto.ItemsSource = filtros.Keys.ToList();
+            PickerProducto.SelectedItem = "Todo";
             LoadProductos();
         }
 
@@ -67,9 +68,10 @@ namespace HardwareStoreAdmin
             FiltroMovil.BackgroundColor = (Color)Application.Current.Resources["NaranjaClaro"];
 
             var button = sender as Button;
+            categoriaSeleccionada = boton?.Text ?? "Todo";
             button.BackgroundColor = (Color)Application.Current.Resources["Naranja"];
 
-            if (categoria == "Todos")
+            if (categoria == "Todo")
             {
                 productosFiltrados = await _productoService.GetProductosAsync();
             }
@@ -82,17 +84,16 @@ namespace HardwareStoreAdmin
             foreach (var producto in productosFiltrados)
             {
                 Productos.Add(producto);
-                busquedaProductoTxt.Text = "";
             }
         }
 
         private async void BuscarProductoBtn(object sender, EventArgs e)
         {
             // recoge lo que está escrito en el buscador y lo que se ha elegido en el picker. 
-            var textoBusqueda = busquedaProductoTxt.Text?.Trim();
-            var filtroSeleccionado = PickerProducto.SelectedItem as string;
+            var textoBusqueda = busquedaProductoTxt.Text?.Trim() ?? "";
+            var filtroSeleccionado = (PickerProducto.SelectedItem as string) ?? "Todo";
 
-            string datoSeleccionado = filtros.ContainsKey(filtroSeleccionado) ? filtros[filtroSeleccionado] : "Todo";
+            filtros.TryGetValue(filtroSeleccionado, out var datoSeleccionado);
             var resultado = await _productoService.GetProductoFiltradoSearchBar(textoBusqueda, datoSeleccionado, categoriaSeleccionada);
 
             Productos.Clear();

@@ -166,18 +166,7 @@
                             ColumnDefinitions="Auto,*"
                             VerticalOptions="Center">
                             <!--  Lupa  -->
-                            <Image
-                                Margin="0,0,8,0"
-                                HeightRequest="20"
-                                VerticalOptions="Center"
-                                WidthRequest="20">
-                                <Image.Source>
-                                    <FontImageSource
-                                        FontFamily="Iconos"
-                                        Glyph="{x:Static iconos:Iconos.lupa}"
-                                        Color="Gray" />
-                                </Image.Source>
-                            </Image>
+                            
 
                             <!--  SearchBar  -->
                             <SearchBar
@@ -251,7 +240,7 @@
                         BackgroundColor="{x:StaticResource Naranja}"
                         Clicked="BtnFiltro"
                         CornerRadius="20"
-                        Text="Todos"
+                        Text="Todo"
                         TextColor="Black" />
                     <Button
                         x:Name="FiltroPortatil"

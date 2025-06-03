@@ -63,7 +63,7 @@ namespace HardwareStoreAdmin.Servicios
             return producto;
         }
 
-        public async Task<List<Producto>> GetProductoFiltradoSearchBar(string textoBusqueda, string datoSeleccionado, string categoria)
+        public async Task<List<Producto>> GetProductoFiltradoSearchBar(string textoBusqueda, string pickerSeleccionado, string categoria)
         {
             // cargamos todos los productos
             var todosLosProductos = await GetProductosAsync();
@@ -73,7 +73,7 @@ namespace HardwareStoreAdmin.Servicios
                 todosLosProductos = todosLosProductos
                     .Where(p => p.Categoria.Equals(categoria, StringComparison.OrdinalIgnoreCase)).ToList();
             }
-            if (datoSeleccionado == "Todo")
+            if (pickerSeleccionado == "Todo")
             {
                 return todosLosProductos.Where(p => p.NombreEmpresa.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase) 
                 || p.NombreProducto.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase)).ToList();
@@ -84,7 +84,7 @@ namespace HardwareStoreAdmin.Servicios
                     .Where(p =>
                     {
                         // obtenemos el tipo de objeto (Producto), luego un atributo del objeto (datoSeleccionado) y finalmente su valor como texto.
-                        var valorTextoBusqueda = p.GetType()?.GetProperty(datoSeleccionado)?.GetValue(p)?.ToString();
+                        var valorTextoBusqueda = p.GetType()?.GetProperty(pickerSeleccionado)?.GetValue(p)?.ToString();
                         return valorTextoBusqueda != null && valorTextoBusqueda.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase);
                     }).ToList();
 

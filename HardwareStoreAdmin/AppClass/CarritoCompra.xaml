@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+text<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -137,40 +137,41 @@
             <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Carrito de Compra" />
         </Grid>
 
-        <!--  Información extra como total  -->
-        <Grid Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="10">
-                <Label
-                    FontSize="16"
-                    Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
-                    TextColor="White" />
-
-                <Label
-                    FontSize="16"
-                    Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}"
-                    TextColor="{StaticResource Naranja}" />
-            </VerticalStackLayout>
-        </Grid>
-
         <!--  Lista de productos en carrito  -->
-        <Grid Grid.Row="2" ColumnDefinitions=".7*,.3*">
+        <Grid Grid.Row="2">
             <Border Style="{StaticResource BorderModListaFavorito}">
-                <CollectionView
+                <Grid ColumnDefinitions=".6*,.4*">
+                    <CollectionView
                     Margin="10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
                     ItemsSource="{Binding ProductosEnCarrito}"
                     SelectionChanged="OnProductoSeleccionado"
                     SelectionMode="Single"
                     Grid.Column="0">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
                             Orientation="Vertical"
                             Span="1"
                             VerticalItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
-                
-                
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+
+                    <Border Style="{StaticResource BorderModListaFavorito1}">
+                        <VerticalStackLayout Padding="20" Spacing="10">
+                            <Label
+                                FontSize="16"
+                                Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
+                                TextColor="White" />
+
+                            <Label
+                                FontSize="16"
+                                Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}"
+                                TextColor="{StaticResource Naranja}" />
+
+                            <CheckBox />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

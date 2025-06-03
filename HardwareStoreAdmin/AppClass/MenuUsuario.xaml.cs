@@ -38,6 +38,6 @@ public partial class MenuUsuario : ContentPage
 
     private async void MostrarInfo_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Acerca de", "HardwareStore v1.0\nDesarrollado por Roberto y Daniel.", "OK");
+        await DisplayAlert("Acerca de", "HardwareStore v1.0\nDesarrollado por Roberto Jiang y Daniel Pajarón.", "OK");
     }
 }

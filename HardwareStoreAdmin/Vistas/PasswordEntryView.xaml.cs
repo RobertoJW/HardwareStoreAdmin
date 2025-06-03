@@ -4,6 +4,7 @@ public partial class PasswordEntryView : ContentView
 {
     public Border EntryBorderPublic => ContrasenaBorder;
     public Label LabelPublic => ContraseñaErrorLabel;
+    public Entry PasswordEntryControl => PasswordEntry;
 
     public PasswordEntryView()
     {
@@ -61,4 +62,10 @@ public partial class PasswordEntryView : ContentView
         ContrasenaBorder.Stroke = Colors.Gray;
         ContraseñaErrorLabel.IsVisible = false;
     }
+    public void Clear()
+    {
+        Password = string.Empty;
+        PasswordEntry.Text = string.Empty;
+    }
+
 }

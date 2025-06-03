@@ -232,6 +232,7 @@ public partial class LoginPage : ContentPage
     }
     private async void OnLoginSuccess()
     {
+        LimpiarCampos();
         // Navegar a la página principal
         await Shell.Current.GoToAsync("//MainPage");
 
@@ -257,4 +258,28 @@ public partial class LoginPage : ContentPage
         EmailLoginBorder.Stroke = Colors.Gray;
         CorreoErrorLabel.IsVisible = false;
     }
+    public void LimpiarCampos()
+    {
+        // Campos de login
+        EmailLoginEntry.Text = string.Empty;
+        passwordInicioSesion.Clear(); // Asumiendo que PasswordEntryView tiene este método o propiedad
+
+        // Campos de registro
+        UserRegisterEntry.Text = string.Empty;
+        EmailRegisterEntry.Text = string.Empty;
+        passwordRegistro.Clear();
+        passwordRegistro2.Clear();
+
+        // Resetear errores
+        CorreoErrorLabel.IsVisible = false;
+        CorreoErrorLabel.Opacity = 0;
+        UserErrorLabel.IsVisible = false;
+        UserErrorLabel.Opacity = 0;
+        EmailErrorLabel.IsVisible = false;
+        EmailErrorLabel.Opacity = 0;
+
+        // Checkbox
+        MantenerSesion.IsChecked = false;
+    }
+
 }

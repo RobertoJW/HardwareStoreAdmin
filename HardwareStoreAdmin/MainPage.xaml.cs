@@ -26,11 +26,19 @@ namespace HardwareStoreAdmin
         public MainPage()
         {
             InitializeComponent();
-            myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}!";
             BindingContext = this;
             PickerProducto.ItemsSource = filtros.Keys.ToList();
             PickerProducto.SelectedItem = "Todo";
             LoadProductos();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (App.UsuarioActual != null)
+            {
+                myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}!";
+            }
         }
 
         private async void LoadProductos()

@@ -1,14 +1,50 @@
+using System.ComponentModel;
+
 namespace HardwareStoreAdmin.AppClass;
 
-public partial class MenuUsuario : ContentPage
+public partial class MenuUsuario : ContentPage, INotifyPropertyChanged
 {
-    public string UsuarioNombre { get; set; }
-    public string UsuarioEmail { get; set; }
+    private string _usuarioNombre;
+    public string UsuarioNombre
+    {
+        get => _usuarioNombre;
+        set
+        {
+            if (_usuarioNombre != value)
+            {
+                _usuarioNombre = value;
+                OnPropertyChanged(nameof(UsuarioNombre));
+            }
+        }
+    }
 
+    private string _usuarioEmail;
+    public string UsuarioEmail
+    {
+        get => _usuarioEmail;
+        set
+        {
+            if (_usuarioEmail != value)
+            {
+                _usuarioEmail = value;
+                OnPropertyChanged(nameof(UsuarioEmail));
+            }
+        }
+    }
     public MenuUsuario()
     {
         InitializeComponent();
+
+        if (App.UsuarioActual != null)
+        {
+            UsuarioNombre = App.UsuarioActual.userName;
+            UsuarioEmail = App.UsuarioActual.email;
+        }
         BindingContext = this;
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
 
         if (App.UsuarioActual != null)
         {
@@ -40,4 +76,8 @@ public partial class MenuUsuario : ContentPage
     {
         await DisplayAlert("Acerca de", "HardwareStore v1.0\nDesarrollado por Roberto Jiang y Daniel Pajarón.", "OK");
     }
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged(string propertyName) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 }

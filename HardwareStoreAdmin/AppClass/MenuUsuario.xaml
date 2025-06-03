@@ -46,12 +46,12 @@
 
             <!--  Opciones / Ajustes  -->
             <VerticalStackLayout Spacing="15" WidthRequest="250">
-                <Button Clicked="CambiarModoOscuro_Clicked" Text="🌙 Modo oscuro" />
                 <Button
                     BackgroundColor="Red"
                     Clicked="CerrarSesion_Clicked"
                     Text="🔒 Cerrar sesión"
                     TextColor="White" />
+                <Button Clicked="CambiarModoOscuro_Clicked" Text="🌙 Modo oscuro" />
                 <Button Clicked="MostrarInfo_Clicked" Text="ℹ️ Acerca de" />
             </VerticalStackLayout>
 

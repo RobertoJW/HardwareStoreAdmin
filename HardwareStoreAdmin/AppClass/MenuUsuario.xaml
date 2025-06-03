@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HardwareStoreAdmin.AppClass.MenuUsuario"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
+    Title="MenuUsuario"
+    BackgroundColor="{StaticResource BGGris}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            HorizontalOptions="Center"
+            Spacing="30">
+
+            <!--  Foto de perfil simulada con Border  -->
+            <Border
+                BackgroundColor="Gray"
+                HeightRequest="120"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 60"
+                VerticalOptions="Center"
+                WidthRequest="120">
+                <Image>
+                    <Image.Source>
+                        <FontImageSource
+                            FontFamily="Iconos"
+                            Glyph="{x:Static iconos:Iconos.usuario}"
+                            Size="64"
+                            Color="White" />
+                    </Image.Source>
+                </Image>
+            </Border>
+
+            <!--  Nombre y correo  -->
+            <Label
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="{Binding UsuarioNombre}" />
+            <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="{Binding UsuarioEmail}"
+                TextColor="Gray" />
+
+            <!--  Opciones / Ajustes  -->
+            <VerticalStackLayout Spacing="15" WidthRequest="250">
+                <Button Clicked="CambiarModoOscuro_Clicked" Text="🌙 Modo oscuro" />
+                <Button
+                    BackgroundColor="Red"
+                    Clicked="CerrarSesion_Clicked"
+                    Text="🔒 Cerrar sesión"
+                    TextColor="White" />
+                <Button Clicked="MostrarInfo_Clicked" Text="ℹ️ Acerca de" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

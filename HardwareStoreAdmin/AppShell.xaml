@@ -58,5 +58,17 @@
                     Color="White" />
             </ShellContent.Icon>
         </ShellContent>
+
+        <ShellContent
+            Title="Menú"
+            ContentTemplate="{DataTemplate AppClass:MenuUsuario}"
+            Route="MenuUsuario">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Iconos"
+                    Glyph="{x:Static iconos:Iconos.ajustes}"
+                    Color="White" />
+            </ShellContent.Icon>
+        </ShellContent>
     </TabBar>
 </Shell>

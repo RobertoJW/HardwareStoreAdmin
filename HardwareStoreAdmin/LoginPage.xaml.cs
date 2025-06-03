@@ -107,6 +107,10 @@ public partial class LoginPage : ContentPage
             return;
         } else
         {
+            if (MantenerSesion.IsChecked)
+            {
+                Preferences.Set("usuario_logueado_id", usuario.userId);
+            }
             App.UsuarioActual = usuario;
             OnLoginSuccess();
             await DisplayAlert("Bienvenido", "Inicio de sesión exitoso", "Continuar");
@@ -226,8 +230,6 @@ public partial class LoginPage : ContentPage
             return false;
         }
     }
-
-
     private async void OnLoginSuccess()
     {
         // Navegar a la página principal

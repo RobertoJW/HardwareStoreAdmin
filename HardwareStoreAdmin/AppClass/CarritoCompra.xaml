@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:selector="clr-namespace:HardwareStoreAdmin.Vistas"
     BackgroundColor="{StaticResource BGGris}">
-    
+
     <ContentPage.Resources>
         <!--  PLANTILLA MÓVIL  -->
         <DataTemplate x:Key="MovilTemplate">
@@ -129,7 +129,7 @@
             SobremesaTemplate="{StaticResource SobremesaTemplate}" />
     </ContentPage.Resources>
     <Grid RowDefinitions=".1*,.7*,Auto">
-        <!--  Título (Fila 0) -->
+        <!--  Título (Fila 0)  -->
         <Grid
             Grid.Row="0"
             Margin="0,15,0,0"
@@ -138,16 +138,16 @@
             <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Carrito de Compra" />
         </Grid>
 
-        <!--  Lista de productos en carrito (Fila 1) -->
+        <!--  Lista de productos en carrito (Fila 1)  -->
         <Grid Grid.Row="1">
             <Border Style="{StaticResource BorderModCarritoCompra}">
                 <CollectionView
+                    Grid.Column="0"
                     Margin="10"
                     ItemTemplate="{StaticResource ProductoTemplateSelector}"
                     ItemsSource="{Binding ProductosEnCarrito}"
                     SelectionChanged="OnProductoSeleccionado"
-                    SelectionMode="Single"
-                    Grid.Column="0">
+                    SelectionMode="Single">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             Orientation="Vertical"
@@ -158,13 +158,16 @@
 
             </Border>
         </Grid>
-            <HorizontalStackLayout Grid.Row="2" Style="{StaticResource InformacionPagoMod}">
-                <!--<Label
+        <HorizontalStackLayout Grid.Row="2" Style="{StaticResource InformacionPagoMod}">
+            <!--<Label
                     FontSize="16"
                     Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
                     TextColor="White" />-->
-            <Label Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}" Style="{StaticResource PrecioProductoMod}"/>
-            <Button Text="Pagar ->" Command="{Binding PagarComando}" Style="{StaticResource btnModPagar}"/>
+            <Label Style="{StaticResource PrecioProductoMod}" Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}" />
+            <Button
+                Command="{Binding PagarCommand}"
+                Style="{StaticResource btnModPagar}"
+                Text="Pagar -&gt;" />
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

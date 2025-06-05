@@ -76,19 +76,49 @@ namespace HardwareStoreAdmin.ViewModels
 
         private async Task Pagar()
         {
+            if (ProductosEnCarrito == null || ProductosEnCarrito.Count == 0)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Carrito vacío",
+                    "No puedes realizar una compra si no hay productos en el carrito.",
+                    "OK");
+                return;
+            }
+
+            var confirmacion = await Shell.Current.DisplayAlert(
+                "Confirmar compra",
+                $"Vas a realizar tu compra por un total de {PrecioTotal:C}.\n¿Deseas continuar?",
+                "Sí", "No");
+
+            if (!confirmacion) return;
+
             var result = await _usuarioService.VaciarCarritoUsuarioAsync(App.UsuarioActual.userId);
+
             if (result)
             {
+                // Vaciar productos localmente
                 ProductosEnCarrito.Clear();
                 PrecioTotal = 0;
                 OnPropertyChanged(nameof(PrecioTotal));
-                await Shell.Current.DisplayAlert("Compra realizada", "Gracias por tu compra.", "OK");
+
+                // Generar número de orden simulado
+                var numeroOrden = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+
+                // Mostrar mensaje personalizado
+                await Shell.Current.DisplayAlert(
+                    "🎉 ¡Gracias por tu compra!",
+                    $"Tu pedido ha sido recibido con éxito.\n\nN.º de orden: {numeroOrden}",
+                    "Aceptar");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "No se pudo completar la compra.", "OK");
+                await Shell.Current.DisplayAlert(
+                    "Error",
+                    "No se pudo completar la compra. Intenta de nuevo.",
+                    "OK");
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string nombre = null)

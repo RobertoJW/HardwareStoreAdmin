@@ -1,75 +1,33 @@
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using HardwareStoreAdmin.Modelo;
-using HardwareStoreAdmin.Servicios;
+using HardwareStoreAdmin.ViewModels;
 
-namespace HardwareStoreAdmin.AppClass;
-
-public partial class CarritoCompra : ContentPage, INotifyPropertyChanged
+namespace HardwareStoreAdmin.AppClass
 {
-    private readonly UsuarioService _usuarioService = new();
-    private readonly ProductoService _productoService = new();
-
-    public ObservableCollection<Producto> ProductosEnCarrito { get; set; } = new();
-
-    private int _productosEnCarritoNumero;
-    public int ProductosEnCarritoNumero
+    public partial class CarritoCompra : ContentPage
     {
-        get => _productosEnCarritoNumero;
-        set
+        private readonly CarritoCompraViewModel _viewModel;
+
+        public CarritoCompra()
         {
-            _productosEnCarritoNumero = value;
-            OnPropertyChanged();
+            InitializeComponent();
+            _viewModel = new CarritoCompraViewModel();
+            BindingContext = _viewModel;
         }
-    }
 
-    private decimal _precioTotal;
-    public decimal PrecioTotal
-    {
-        get => _precioTotal;
-        set
+        protected override async void OnAppearing()
         {
-            _precioTotal = value;
-            OnPropertyChanged();
+            base.OnAppearing();
+            await _viewModel.CargarCarrito();
         }
-    }
 
-    public CarritoCompra()
-    {
-        InitializeComponent();
-        BindingContext = this;
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        await CargarCarrito();
-    }
-
-    private async Task CargarCarrito()
-    {
-        var usuario = await _usuarioService.GetProductoPorIdUsuarioAsync(App.UsuarioActual.userId);
-        ProductosEnCarrito.Clear();
-
-        if (usuario?.CarritoCompra?.Productos != null)
+        private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)
         {
-            foreach (var producto in usuario.CarritoCompra.Productos)
+            if (e.CurrentSelection.FirstOrDefault() is Producto p)
             {
-                ProductosEnCarrito.Add(producto);
+                ((CollectionView)sender).SelectedItem = null;
+                var detalle = await _viewModel.CargarProductoDetalle(p.IdProducto);
+                await Navigation.PushAsync(new InterfazDetallesProducto(detalle));
             }
-        }
-        ProductosEnCarritoNumero = ProductosEnCarrito.Count;
-        PrecioTotal = ProductosEnCarrito.Sum(p => p.Precio);
-    }
-
-    private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.FirstOrDefault() is Producto productoSeleccionado)
-        {
-            ((CollectionView)sender).SelectedItem = null;
-
-            var productoCompleto = await _productoService.GetProductoPorIdAsync(productoSeleccionado.IdProducto);
-            await Navigation.PushAsync(new InterfazDetallesProducto(productoCompleto));
         }
     }
 }

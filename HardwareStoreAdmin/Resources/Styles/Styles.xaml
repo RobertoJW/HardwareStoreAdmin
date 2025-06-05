@@ -697,12 +697,11 @@
     </Style>
 
     <Style x:Key="btnModPagar" TargetType="Button">
-        <Setter Property="Text" Value="Pagar ->" />
         <Setter Property="TextColor" Value="White"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Naranja}" />
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="VerticalOptions" Value="Center"/>
-        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
     <Style x:Key="LabelPrecioCarritoCompra" TargetType="Label">

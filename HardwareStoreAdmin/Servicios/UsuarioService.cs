@@ -123,6 +123,17 @@ namespace HardwareStoreAdmin.Servicios
             return null;
         }
 
+        // Vaciar el carrito de un usuario
+        public async Task<bool> VaciarCarritoUsuarioAsync(int userId)
+        {
+            var response = await _httpClient.DeleteAsync($"{baseUrl}/{userId}/carrito");
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine($"[VaciarCarritoUsuario] Error: {response.StatusCode}");
+            }
+            return response.IsSuccessStatusCode;
+        }
+
         // METODOS PARA FILTROS Y BARRA DE BUSQUEDA
         // metodo para mostrar TODOS los productos de la lista de favoritos.
         public async Task<List<Producto>> GetTodosLosProductosListaFavoritos(string categoria, int userId)

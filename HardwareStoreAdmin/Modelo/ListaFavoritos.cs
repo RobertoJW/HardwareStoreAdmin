@@ -14,10 +14,10 @@ namespace HardwareStoreAdmin.Modelo
         [Key]
         public int id_favorito { get; set; }
 
-        public int userId { get; set; }
-        public virtual Usuario? Usuario { get; set; }
+        public int? userId { get; set; }
 
-        // Una lista puede tener muchos productos   
-        public virtual List<Producto> Productos { get; set; } = new List<Producto>();
+        public virtual Usuario? Usuario { get; set; }
+        // Una lista de favoritos puede tener multiples productos.
+        public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
     }
 }

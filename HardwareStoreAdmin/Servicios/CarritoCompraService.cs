@@ -56,5 +56,14 @@ namespace HardwareStoreAdmin.Servicios
             var response = await _httpClient.PostAsync($"{baseUrl}/quitar", content);
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> VaciarCarritoAsync(int userId)
+        {
+            var response = await _httpClient.DeleteAsync($"{baseUrl}/vaciar/{userId}");
+            var contenido = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"[VaciarCarrito] Respuesta: {response.StatusCode} - {contenido}");
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }

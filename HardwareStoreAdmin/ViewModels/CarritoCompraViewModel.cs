@@ -22,6 +22,13 @@ namespace HardwareStoreAdmin.ViewModels
             set { _precioTotal = value; OnPropertyChanged(); }
         }
 
+        private bool _carritoVacio;
+        public bool CarritoVacio
+        {
+            get => _carritoVacio;
+            set { _carritoVacio = value; OnPropertyChanged(); }
+        }
+
         private bool _isCargando;
         public bool IsCargando
         {
@@ -64,6 +71,7 @@ namespace HardwareStoreAdmin.ViewModels
             // Notificar que se actualizó el total
             OnPropertyChanged(nameof(PrecioTotal));
 
+            CarritoVacio = carrito?.Productos == null || carrito.Productos.Count == 0;
             IsCargando = false;
         }
 
@@ -118,7 +126,6 @@ namespace HardwareStoreAdmin.ViewModels
                     "OK");
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string nombre = null)

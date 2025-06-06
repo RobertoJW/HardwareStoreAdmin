@@ -3,6 +3,7 @@
     x:Class="HardwareStoreAdmin.AppClass.CarritoCompra"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:HardwareStoreAdmin.Converter"
     xmlns:selector="clr-namespace:HardwareStoreAdmin.Vistas"
     BackgroundColor="{StaticResource BGGris}">
 
@@ -127,6 +128,10 @@
             MovilTemplate="{StaticResource MovilTemplate}"
             PortatilTemplate="{StaticResource PortatilTemplate}"
             SobremesaTemplate="{StaticResource SobremesaTemplate}" />
+
+        <ResourceDictionary>
+            <local:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions=".1*,.7*,Auto">
         <!--  Título (Fila 0)  -->
@@ -141,23 +146,35 @@
         <!--  Lista de productos en carrito (Fila 1)  -->
         <Grid Grid.Row="1">
             <Border Style="{StaticResource BorderModCarritoCompra}">
-                <CollectionView
-                    Grid.Column="0"
-                    Margin="10"
-                    ItemTemplate="{StaticResource ProductoTemplateSelector}"
-                    ItemsSource="{Binding ProductosEnCarrito}"
-                    SelectionChanged="OnProductoSeleccionado"
-                    SelectionMode="Single">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
-                            Orientation="Vertical"
-                            Span="1"
-                            VerticalItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
+                <Grid Padding="10">
+                    <!--  Mensaje cuando el carrito está vacío  -->
+                    <Label
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding CarritoVacio}"
+                        Text="Tu carrito está vacío. ¡Agrega productos para empezar!"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
 
+                    <!--  Lista de productos  -->
+                    <CollectionView
+                        Margin="10"
+                        IsVisible="{Binding CarritoVacio, Converter={StaticResource InverseBoolConverter}}"
+                        ItemTemplate="{StaticResource ProductoTemplateSelector}"
+                        ItemsSource="{Binding ProductosEnCarrito}"
+                        SelectionChanged="OnProductoSeleccionado"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                Span="1"
+                                VerticalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+                </Grid>
             </Border>
         </Grid>
+
         <HorizontalStackLayout Grid.Row="2" Style="{StaticResource InformacionPagoMod}">
             <!--<Label
                     FontSize="16"

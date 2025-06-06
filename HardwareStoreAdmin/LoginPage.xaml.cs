@@ -197,20 +197,23 @@ public partial class LoginPage : ContentPage
         }
         if (hayError) return;
 
-        bool registrado = await RegistrarUsuario(nombre, email, contraseña1);
+        // Intentamos registrar
+        var usuario = await RegistrarUsuario(nombre, email, contraseña1);
 
-        if (!registrado)
+        if (usuario == null)
         {
-            await DisplayAlert("Error", "El usuario ya existe o el correo está en uso", "Aceptar");
+            await DisplayAlert("Error", "El usuario ya existe o el correo está en uso.", "Aceptar");
             return;
         }
-        else
-        {
-            OnLoginSuccess();
-            await DisplayAlert("Éxito", "Usuario registrado correctamente", "Aceptar");
-        }
+
+        // Usuario creado correctamente
+        App.UsuarioActual = usuario;
+
+        await DisplayAlert("Bienvenido", $"Cuenta creada exitosamente, {usuario.userName}.", "Continuar");
+
+        OnLoginSuccess(); // Ir al menú principal o donde necesites
     }
-    private async Task<bool> RegistrarUsuario(string user, string email, string password)
+    private async Task<Usuario> RegistrarUsuario(string user, string email, string password)
     {
         try
         {
@@ -218,18 +221,19 @@ public partial class LoginPage : ContentPage
             if (usuario == null)
             {
                 Debug.WriteLine("[FALLO] No se pudo crear el usuario.");
-                return false;
+                return null;
             }
 
             Debug.WriteLine("[ÉXITO] Usuario creado con ID: " + usuario.userId);
-            return true;
+            return usuario;
         }
         catch (Exception ex)
         {
             Debug.WriteLine("[EXCEPCIÓN] " + ex.Message);
-            return false;
+            return null;
         }
     }
+
     private async void OnLoginSuccess()
     {
         LimpiarCampos();

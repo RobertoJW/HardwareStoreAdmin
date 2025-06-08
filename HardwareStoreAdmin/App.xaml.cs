@@ -11,38 +11,39 @@ namespace HardwareStoreAdmin
         public App()
         {
             InitializeComponent();
-
-            // Asignamos provisionalmente AppShell; luego, en InitializeAsync, navegaremos a la página adecuada.
-            MainPage = new AppShell();
-
-            // Iniciar la comprobación de sesión de forma asíncrona
-            InitializeAsync();
+            MainPage = new AppShell(); // No navegamos aún
         }
 
-        private async void InitializeAsync()
+        protected override async void OnStart()
         {
-            await Task.Delay(100); // Espera breve para asegurar que Shell.Current se inicialice
+            base.OnStart();
+            await InitializeAsync(); // Aquí ya la UI debería estar lista
+        }
 
-            // 1) Intentamos leer el ID guardado
+        private async Task InitializeAsync()
+        {
+            await Task.Delay(100); // Por si acaso
+
             int userIdGuardado = Preferences.Get("usuario_logueado_id", -1);
 
             if (userIdGuardado != -1)
             {
-                // 2) Si había un ID, lo cargamos desde la API
                 var usuarioService = new UsuarioService();
                 var usuario = await usuarioService.GetProductoPorIdUsuarioAsync(userIdGuardado);
 
                 if (usuario != null)
                 {
-                    // 3) Si existe, asignamos y navegamos a la página principal
                     UsuarioActual = usuario;
-                    await Shell.Current.GoToAsync("//MainPage");
+
+                    // Verifica que Shell.Current no sea null antes de navegar
+                    if (Shell.Current != null)
+                        await Shell.Current.GoToAsync("//MainPage");
                     return;
                 }
-            }   
+            }
 
-            // 4) Si no hay ID o no se pudo recuperar, nos quedamos en LoginPage
-            await Shell.Current.GoToAsync("//LoginPage");
+            if (Shell.Current != null)
+                await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

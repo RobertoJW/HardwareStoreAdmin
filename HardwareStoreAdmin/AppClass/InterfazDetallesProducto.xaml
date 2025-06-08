@@ -50,13 +50,15 @@
 
                     <Label
                         Grid.ColumnSpan="2"
+                        FontFamily="PoppinsBold"
                         Style="{StaticResource NombreProductoMod}"
                         Text="{Binding NombreProducto, Converter={StaticResource TruncadorTexto}}" />
 
                     <Label
                         Grid.Column="2"
                         FontAttributes="Bold"
-                        FontSize="20"
+                        FontFamily="PoppinsRegular"
+                        FontSize="18"
                         HorizontalTextAlignment="Center"
                         Text="{Binding Precio, StringFormat='{0}€'}"
                         TextColor="{StaticResource Naranja}" />
@@ -64,7 +66,9 @@
                     <Label
                         Grid.Row="1"
                         Grid.ColumnSpan="2"
-                        FontSize="15"
+                        Margin="0,0,0,10"
+                        FontFamily="OpenSansRegular"
+                        FontSize="14"
                         Text="{Binding NombreEmpresa, StringFormat='Empresa: {0}'}"
                         TextColor="White" />
 
@@ -74,54 +78,67 @@
                         Grid.ColumnSpan="3"
                         BackgroundColor="{StaticResource Naranja}"
                         Command="{Binding ToggleCarritoCommand}"
+                        FontFamily="PoppinsRegular"
+                        FontSize="16"
                         Text="{Binding TextoBotonCarrito}" />
 
                 </Grid>
             </ScrollView>
         </Border>
         <Grid Grid.Row="3">
-            <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="20"
-                    Text="Detalles del producto"
-                    TextColor="White" />
-                <Border Style="{StaticResource BorderMod4}">
-                    <Grid
-                        Margin="15,15,0,0"
-                        RowDefinitions="Auto,*,*,*,*,*,*"
-                        RowSpacing="15">
-                        <Label
-                            Grid.Row="0"
-                            Text="{Binding DescripcionGeneral.CPU, StringFormat='CPU: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="1"
-                            Text="{Binding DescripcionGeneral.RAM, StringFormat='RAM: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="2"
-                            Text="{Binding DescripcionGeneral.GPU, StringFormat='GPU: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="3"
-                            Text="{Binding DescripcionGeneral.Almacenamiento, StringFormat='Almacenamiento: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="4"
-                            Text="{Binding DescripcionGeneral.SistemaOperativo, StringFormat='Sistema Operativo: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="5"
-                            Text="{Binding DescripcionGeneral.Peso, StringFormat='Peso: {0}.'}"
-                            TextColor="White" />
-                        <Label
-                            Grid.Row="6"
-                            Text="{Binding DescripcionGeneral.Dimensiones, StringFormat='Dimensiones: {0}.'}"
-                            TextColor="White" />
-                    </Grid>
-                </Border>
-            </VerticalStackLayout>
+            <ScrollView>
+                <VerticalStackLayout Margin="0,20,0,0" Spacing="10">
+                    <Label
+                        FontAttributes="Bold"
+                        FontFamily="PoppinsBold"
+                        FontSize="20"
+                        Text="Detalles del producto"
+                        TextColor="White" />
+                    <Border Style="{StaticResource BorderMod4}">
+                        <Grid
+                            Margin="15,15,0,0"
+                            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                            RowSpacing="15">
+                            <Label
+                                Grid.Row="0"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.CPU, StringFormat='CPU: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="1"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.RAM, StringFormat='RAM: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="2"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.GPU, StringFormat='GPU: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="3"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.Almacenamiento, StringFormat='Almacenamiento: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="4"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.SistemaOperativo, StringFormat='Sistema Operativo: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="5"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.Peso, StringFormat='Peso: {0}.'}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="6"
+                                FontFamily="PoppinsRegular"
+                                Text="{Binding DescripcionGeneral.Dimensiones, StringFormat='Dimensiones: {0}.'}"
+                                TextColor="White" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
         </Grid>
+
     </Grid>
 </ContentPage>

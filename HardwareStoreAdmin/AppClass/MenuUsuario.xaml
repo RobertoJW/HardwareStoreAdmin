@@ -4,15 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iconos="clr-namespace:HardwareStoreAdmin.Iconos"
-    Title="MenuUsuario"
     BackgroundColor="{StaticResource BGGris}">
 
-    <ScrollView>
+    <Grid>
         <VerticalStackLayout
             Padding="30"
             HorizontalOptions="Center"
-            Spacing="30">
-
+            Spacing="30"
+            VerticalOptions="Center"
+            WidthRequest="300">
             <!--  Foto de perfil simulada con Border  -->
             <Border
                 BackgroundColor="Gray"
@@ -35,11 +35,13 @@
             <!--  Nombre y correo  -->
             <Label
                 FontAttributes="Bold"
+                FontFamily="PoppinsBold"
                 FontSize="24"
                 HorizontalOptions="Center"
                 Text="{Binding UsuarioNombre}" />
             <Label
-                FontSize="16"
+                FontFamily="PoppinsBold"
+                FontSize="20"
                 HorizontalOptions="Center"
                 Text="{Binding UsuarioEmail}"
                 TextColor="Gray" />
@@ -49,12 +51,21 @@
                 <Button
                     BackgroundColor="Red"
                     Clicked="CerrarSesion_Clicked"
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
                     Text="🔒 Cerrar sesión"
                     TextColor="White" />
-                <Button Clicked="CambiarModoOscuro_Clicked" Text="🌙 Modo oscuro" />
-                <Button Clicked="MostrarInfo_Clicked" Text="ℹ️ Acerca de" />
+                <Button
+                    Clicked="CambiarModoOscuro_Clicked"
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text="🌙 Modo oscuro" />
+                <Button
+                    Clicked="MostrarInfo_Clicked"
+                    FontFamily="PoppinsRegular"
+                    FontSize="16"
+                    Text="ℹ️ Acerca de" />
             </VerticalStackLayout>
-
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>

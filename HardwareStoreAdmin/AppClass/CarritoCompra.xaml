@@ -30,16 +30,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Móvil"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -68,16 +71,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Portátil"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -106,16 +112,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Sobremesa"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -140,7 +149,11 @@
             Margin="0,15,0,0"
             HorizontalOptions="Center"
             VerticalOptions="Center">
-            <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Carrito de Compra" />
+            <Label
+                FontFamily="PoppinsBold"
+                FontSize="24"
+                Style="{StaticResource TituloListaFavoritosPage}"
+                Text="Carrito de Compra" />
         </Grid>
 
         <!--  Lista de productos en carrito (Fila 1)  -->
@@ -149,6 +162,8 @@
                 <Grid Padding="10">
                     <!--  Mensaje cuando el carrito está vacío  -->
                     <Label
+                        Padding="10,0,0,0"
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         HorizontalOptions="Center"
                         IsVisible="{Binding CarritoVacio}"
@@ -175,16 +190,36 @@
             </Border>
         </Grid>
 
-        <HorizontalStackLayout Grid.Row="2" Style="{StaticResource InformacionPagoMod}">
-            <!--<Label
-                    FontSize="16"
-                    Text="{Binding ProductosEnCarritoNumero, StringFormat='Total productos: {0}'}"
+        <HorizontalStackLayout
+            Grid.Row="2"
+            Padding="10"
+            Spacing="20"
+            Style="{StaticResource InformacionPagoMod}"
+            VerticalOptions="Center">
+
+            <!--  Izquierda: textos  -->
+            <VerticalStackLayout VerticalOptions="Center">
+
+                <Label
+                    FontFamily="PoppinsRegular"
+                    Style="{StaticResource PrecioProductoMod}"
+                    Text="{Binding PrecioTotal, StringFormat='Precio total: {0} €'}" />
+
+                <!--<Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="14"
+                    Text="{Binding CantidadProductos, StringFormat='Productos: {0}'}"
                     TextColor="White" />-->
-            <Label Style="{StaticResource PrecioProductoMod}" Text="{Binding PrecioTotal, StringFormat='Total precio: {0:C}'}" />
+            </VerticalStackLayout>
+
+            <!--  Derecha: botón pagar  -->
             <Button
                 Command="{Binding PagarCommand}"
+                FontFamily="PoppinsRegular"
+                HorizontalOptions="End"
                 Style="{StaticResource btnModPagar}"
-                Text="Pagar -&gt;" />
+                Text="Pagar →" />
         </HorizontalStackLayout>
+
     </Grid>
 </ContentPage>

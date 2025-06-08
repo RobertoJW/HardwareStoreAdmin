@@ -30,16 +30,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Móvil"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -68,16 +71,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Portátil"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -106,16 +112,19 @@
                     </Grid>
                     <VerticalStackLayout Grid.Column="1" Spacing="4">
                         <Label
+                            FontFamily="PoppinsRegular"
                             FontSize="16"
                             Text="{Binding NombreProducto}"
                             TextColor="White" />
                         <Label
-                            FontSize="12"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
                             Text="Sobremesa"
                             TextColor="Gray" />
                         <Label
+                            FontFamily="OpenSansSemibold"
                             FontSize="14"
-                            Text="{Binding Precio, StringFormat='Precio: {0:C}'}"
+                            Text="{Binding Precio, StringFormat='Precio: {0} €'}"
                             TextColor="#FF7F00" />
                     </VerticalStackLayout>
                 </Grid>
@@ -136,40 +145,49 @@
         <!--  Título  -->
         <Grid
             Grid.Row="0"
-            Margin="0,15,0,0"
+            Margin="0,15,0,10"
             HorizontalOptions="Center"
             VerticalOptions="Center">
-            <Label Style="{StaticResource TituloListaFavoritosPage}" Text="Lista de Favoritos" />
+            <Label
+                FontFamily="PoppinsBold"
+                FontSize="24"
+                Style="{StaticResource TituloListaFavoritosPage}"
+                Text="Tu lista de favoritos" />
         </Grid>
 
         <!--  Filtros  -->
         <Grid Grid.Row="1">
             <VerticalStackLayout>
                 <Label
-                    Margin="20,0,0,20"
+                    Margin="20,0,0,10"
+                    FontFamily="PoppinsRegular"
                     Style="{StaticResource TituloListaFavoritosPage}"
                     Text="Filtrar por:" />
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
                     <Button
-                        Margin="20,0,0,0"
                         x:Name="FiltroTodos"
+                        Margin="20,0,0,0"
                         Clicked="BtnFiltro"
+                        FontFamily="PoppinsRegular"
                         Style="{StaticResource BtnModFavouritePage}"
                         Text="Todos" />
                     <Button
                         x:Name="FiltroSobremesa"
                         Clicked="BtnFiltro"
+                        FontFamily="PoppinsRegular"
                         Style="{StaticResource BtnModFavouritePage}"
                         Text="Sobremesa" />
                     <Button
                         x:Name="FiltroPortatil"
                         Clicked="BtnFiltro"
+                        FontFamily="PoppinsRegular"
                         Style="{StaticResource BtnModFavouritePage}"
                         Text="Portatil" />
                     <Button
                         x:Name="FiltroMovil"
                         Margin="0,0,20,0"
                         Clicked="BtnFiltro"
+                        FontFamily="PoppinsRegular"
                         Style="{StaticResource BtnModFavouritePage}"
                         Text="Movil" />
                 </HorizontalStackLayout>

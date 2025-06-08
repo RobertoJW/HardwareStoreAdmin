@@ -37,7 +37,7 @@ namespace HardwareStoreAdmin
 
             if (App.UsuarioActual != null)
             {
-                myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}!";
+                myLabel.Text = $"¡Bienvenid@, {App.UsuarioActual?.userName ?? "Invitado"}! 👋";
             }
         }
 

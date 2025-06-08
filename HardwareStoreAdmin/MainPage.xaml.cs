@@ -93,6 +93,7 @@ namespace HardwareStoreAdmin
             {
                 Productos.Add(producto);
             }
+            lblNoProductos.IsVisible = Productos.Count == 0;
         }
 
         private async void BuscarProductoBtn(object sender, EventArgs e)
@@ -109,6 +110,7 @@ namespace HardwareStoreAdmin
             {
                 Productos.Add(producto); 
             }
+            lblNoProductos.IsVisible = Productos.Count == 0;
         }
     }
 }

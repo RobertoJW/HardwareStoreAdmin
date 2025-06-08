@@ -167,6 +167,7 @@
                     <Button
                         x:Name="FiltroTodos"
                         Margin="20,0,0,0"
+                        BackgroundColor="{StaticResource Naranja}"
                         Clicked="BtnFiltro"
                         FontFamily="PoppinsRegular"
                         Style="{StaticResource BtnModFavouritePage}"
@@ -211,6 +212,15 @@
                     </CollectionView.ItemsLayout>
                 </CollectionView>
             </Border>
+            <Label
+                x:Name="lblNoFavoritos"
+                FontFamily="PoppinsRegular"
+                FontSize="18"
+                HorizontalOptions="Center"
+                IsVisible="False"
+                Text=""
+                TextColor="Gray"
+                VerticalOptions="Center" />
         </Grid>
     </Grid>
 </ContentPage>

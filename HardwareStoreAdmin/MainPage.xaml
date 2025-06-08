@@ -286,7 +286,7 @@
                     FontAttributes="Bold"
                     FontFamily="PoppinsBold"
                     FontSize="20"
-                    Text="Más vendidos:"
+                    Text="Nuestros productos:"
                     TextColor="White" />
 
                 <!--  LISTA DE PRODUCTOS  -->
@@ -303,6 +303,15 @@
                             VerticalItemSpacing="5" />
                     </CollectionView.ItemsLayout>
                 </CollectionView>
+                <Label
+                    x:Name="lblNoProductos"
+                    FontFamily="PoppinsRegular"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    IsVisible="False"
+                    Text="No se han encontrado productos para tu búsqueda."
+                    TextColor="Gray"
+                    VerticalOptions="Center" />
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

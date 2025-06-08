@@ -8,6 +8,7 @@ namespace HardwareStoreAdmin.AppClass;
 public partial class ListaFavoritos : ContentPage
 {
     private readonly UsuarioService _usuarioService = new();
+    private int _totalFavoritosInicial = 0;
     public ObservableCollection<Producto> Productos { get; set; } = new();
     private readonly ProductoService _productoService = new ProductoService();
 
@@ -34,6 +35,9 @@ public partial class ListaFavoritos : ContentPage
                 Productos.Add(producto);
             }
         }
+
+        _totalFavoritosInicial = Productos.Count;
+        ActualizarMensajeSinResultados("Todos");
     }
 
     private async void OnProductoSeleccionado(object sender, SelectionChangedEventArgs e)
@@ -77,5 +81,31 @@ public partial class ListaFavoritos : ContentPage
         {
             Productos.Add(producto);
         }
+        ActualizarMensajeSinResultados(categoria);
     }
+    void ActualizarMensajeSinResultados(string categoria)
+    {
+        if (Productos.Count == 0)
+        {
+            // Si originalmente no había ningún favorito, siempre mensaje genérico
+            if (_totalFavoritosInicial == 0)
+            {
+                lblNoFavoritos.Text = "Todavía no has añadido ningún producto a favoritos. ¡Prueba a añadir alguno para gestionar tus productos preferidos de forma sencilla!";
+            }
+            else
+            {
+                // Si sí había favoritos originalmente pero el filtro actual no trajo nada...
+                if (string.IsNullOrWhiteSpace(categoria) || categoria == "Todos")
+                    lblNoFavoritos.Text = "Todavía no has añadido ningún producto a favoritos. ¡Prueba a añadir alguno para gestionar tus productos preferidos de forma sencilla!";
+                else
+                    lblNoFavoritos.Text = $"Aún no has añadido a favoritos ningún producto de la categoría “{categoria}”.";
+            }
+            lblNoFavoritos.IsVisible = true;
+        }
+        else
+        {
+            lblNoFavoritos.IsVisible = false;
+        }
+    }
+
 }

@@ -49,7 +49,7 @@
             <!--  Opciones / Ajustes  -->
             <VerticalStackLayout Spacing="15" WidthRequest="250">
                 <Button
-                    BackgroundColor="Red"
+                    BackgroundColor="{StaticResource Naranja}"
                     Clicked="CerrarSesion_Clicked"
                     FontFamily="PoppinsRegular"
                     FontSize="16"
@@ -59,7 +59,7 @@
                     Clicked="CambiarModoOscuro_Clicked"
                     FontFamily="PoppinsRegular"
                     FontSize="16"
-                    Text="🌙 Modo oscuro" />
+                    Text="🌙 Alternar modo oscuro" />
                 <Button
                     Clicked="MostrarInfo_Clicked"
                     FontFamily="PoppinsRegular"

@@ -290,7 +290,7 @@
                     TextColor="White" />
 
                 <!--  CONTENEDOR DE PRODUCTOS O MENSAJE  -->
-                <Grid HeightRequest="400" VerticalOptions="FillAndExpand">
+                <Grid HeightRequest="400">
                     <!--  Lista de productos  -->
                     <CollectionView
                         x:Name="collectionProductos"

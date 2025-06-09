@@ -1,6 +1,5 @@
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
-using System.Diagnostics;
 
 namespace HardwareStoreAdmin.AppClass;
 

@@ -17,7 +17,7 @@
     <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage" />
 
     <!--  TabBar principal (solo aparece tras login)  -->
-    <TabBar x:Name="MainTabBar">
+    <TabBar x:Name="MainTabBar" Shell.NavBarIsVisible="False">
 
         <ShellContent
             Title="Inicio"

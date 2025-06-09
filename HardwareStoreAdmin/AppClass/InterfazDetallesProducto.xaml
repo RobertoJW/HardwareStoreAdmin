@@ -139,6 +139,5 @@
                 </VerticalStackLayout>
             </ScrollView>
         </Grid>
-
     </Grid>
 </ContentPage>

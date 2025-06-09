@@ -204,12 +204,6 @@
                     FontFamily="PoppinsRegular"
                     Style="{StaticResource PrecioProductoMod}"
                     Text="{Binding PrecioTotal, StringFormat='Precio total: {0} €'}" />
-
-                <!--<Label
-                    FontFamily="PoppinsRegular"
-                    FontSize="14"
-                    Text="{Binding CantidadProductos, StringFormat='Productos: {0}'}"
-                    TextColor="White" />-->
             </VerticalStackLayout>
 
             <!--  Derecha: botón pagar  -->
@@ -220,6 +214,5 @@
                 Style="{StaticResource btnModPagar}"
                 Text="Pagar →" />
         </HorizontalStackLayout>
-
     </Grid>
 </ContentPage>

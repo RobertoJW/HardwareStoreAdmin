@@ -1,7 +1,6 @@
 using HardwareStoreAdmin.Modelo;
 using HardwareStoreAdmin.Servicios;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace HardwareStoreAdmin.AppClass;
 

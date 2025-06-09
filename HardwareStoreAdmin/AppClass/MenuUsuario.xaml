@@ -12,7 +12,7 @@
             HorizontalOptions="Center"
             Spacing="30"
             VerticalOptions="Center"
-            WidthRequest="300">
+            WidthRequest="350">
             <!--  Foto de perfil simulada con Border  -->
             <Border
                 BackgroundColor="Gray"

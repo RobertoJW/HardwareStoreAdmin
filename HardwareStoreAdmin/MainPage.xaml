@@ -289,29 +289,36 @@
                     Text="Nuestros productos:"
                     TextColor="White" />
 
-                <!--  LISTA DE PRODUCTOS  -->
-                <CollectionView
-                    Margin="10,10,10,10"
-                    ItemTemplate="{StaticResource ProductoTemplateSelector}"
-                    ItemsSource="{Binding Productos}"
-                    SelectionChanged="OnProductoSeleccionado"
-                    SelectionMode="Single">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
-                            Orientation="Vertical"
-                            Span="1"
-                            VerticalItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
-                <Label
-                    x:Name="lblNoProductos"
-                    FontFamily="PoppinsRegular"
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    IsVisible="False"
-                    Text="No se han encontrado productos para tu búsqueda."
-                    TextColor="Gray"
-                    VerticalOptions="Center" />
+                <!--  CONTENEDOR DE PRODUCTOS O MENSAJE  -->
+                <Grid HeightRequest="400" VerticalOptions="FillAndExpand">
+                    <!--  Lista de productos  -->
+                    <CollectionView
+                        x:Name="collectionProductos"
+                        Margin="10,10,10,10"
+                        IsVisible="True"
+                        ItemTemplate="{StaticResource ProductoTemplateSelector}"
+                        ItemsSource="{Binding Productos}"
+                        SelectionChanged="OnProductoSeleccionado"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                Span="1"
+                                VerticalItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+
+                    <!--  Mensaje si no hay productos  -->
+                    <Label
+                        x:Name="lblNoProductos"
+                        FontFamily="PoppinsRegular"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        IsVisible="False"
+                        Text="No se han encontrado productos para tu búsqueda."
+                        TextColor="Gray"
+                        VerticalOptions="Start" />
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

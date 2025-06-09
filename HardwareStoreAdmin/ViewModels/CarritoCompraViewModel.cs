@@ -95,7 +95,7 @@ namespace HardwareStoreAdmin.ViewModels
 
             var confirmacion = await Shell.Current.DisplayAlert(
                 "Confirmar compra",
-                $"Vas a realizar tu compra por un total de {PrecioTotal:C}.\n¿Deseas continuar?",
+                $"Vas a realizar tu compra por un total de {PrecioTotal} €.\n¿Deseas continuar?",
                 "Sí", "No");
 
             if (!confirmacion) return;

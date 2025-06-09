@@ -214,6 +214,7 @@
             </Border>
             <Label
                 x:Name="lblNoFavoritos"
+                Margin="20,10,10,10"
                 FontFamily="PoppinsRegular"
                 FontSize="18"
                 HorizontalOptions="Center"

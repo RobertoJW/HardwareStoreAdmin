@@ -11,18 +11,21 @@ namespace HardwareStoreAdmin
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell(); // No navegamos aún
         }
 
-        protected override async void OnStart()
+        protected override Window CreateWindow(IActivationState activationState)
         {
-            base.OnStart();
-            await InitializeAsync(); // Aquí ya la UI debería estar lista
+            var window = new Window(new AppShell());
+
+            // Ejecuta la inicialización asincrónica después que la UI cargue
+            Task.Run(async () => await InitializeAsync());
+
+            return window;
         }
 
         private async Task InitializeAsync()
         {
-            await Task.Delay(100); // Por si acaso
+            await Task.Delay(100); // Por seguridad
 
             int userIdGuardado = Preferences.Get("usuario_logueado_id", -1);
 
@@ -35,15 +38,16 @@ namespace HardwareStoreAdmin
                 {
                     UsuarioActual = usuario;
 
-                    // Verifica que Shell.Current no sea null antes de navegar
                     if (Shell.Current != null)
-                        await Shell.Current.GoToAsync("//MainPage");
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                            Shell.Current.GoToAsync("//MainPage"));
                     return;
                 }
             }
 
             if (Shell.Current != null)
-                await Shell.Current.GoToAsync("//LoginPage");
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                    Shell.Current.GoToAsync("//LoginPage"));
         }
     }
 }

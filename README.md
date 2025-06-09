@@ -1,6 +1,6 @@
 # 🛒 Hardware Store
 
-**Hardware Store** es una aplicación multiplataforma desarrollada como Trabajo de Fin de Grado del Ciclo Formativo Grado Superior en Desarrollo de Aplicaciones Multiplataforma por Daniel Pajarón y Roberto Jiang. Su objetivo es simular una tienda online de productos informáticos, como móviles, portátiles y ordenadores de sobremesa.
+**Hardware Store** es una aplicación multiplataforma cuyo objetivo es simular una tienda online de productos informáticos, como móviles, portátiles y ordenadores de sobremesa.
 
 La aplicación ha sido desarrollada con .NET MAUI, permitiendo su uso tanto en dispositivos móviles (Android, iOS) como en ordenadores (Windows, macOS).
 
@@ -41,3 +41,9 @@ La aplicación se conecta a una **API REST desarrollada en C#** utilizando .NET 
 - Consultar productos
 - Añadir o quitar productos del carrito o de la lista de favoritos
 - Guardar y recuperar datos desde la base de datos
+
+## 👨‍💻 Autores
+
+Daniel Pajarón y Roberto Jiang
+
+Trabajo Fin de Grado – IES Valle Inclán (Curso 2024–2025)
